@@ -20,9 +20,8 @@
 				static::$plugin_core_initialized = true;
 				
 				add_action( 'admin_menu', array( $this, 'admin_menu' ), 1 );
+				add_action( 'admin_menu', array( $this, 'section_menus' ), 1 );
 			}
-			
-			add_action( 'admin_menu', array( $this, 'section_menus' ), 1 );
 		}
 		public function admin_menu() {
 			add_menu_page(
