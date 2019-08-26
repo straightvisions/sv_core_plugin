@@ -436,13 +436,6 @@ section.sv_admin_section .section_head.section_legal::before{
 	content: '\f24e';
 }
 
-div.sv_admin_menu .sv_admin_menu_item.section_core_docs::before,
-div.sv_admin_menu .sv_admin_menu_item.section_docs::before,
-section.sv_admin_section .section_head.section_core_docs::before,
-section.sv_admin_section .section_head.section_docs::before{
-	content: '\f02d';
-}
-
 div.sv_admin_menu .sv_admin_menu_item.section_settings:before,
 section.sv_admin_section .section_head.section_settings::before{
 	content: '\f1de';
