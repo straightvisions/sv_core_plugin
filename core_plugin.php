@@ -21,6 +21,8 @@
 				
 				add_action( 'admin_menu', array( $this, 'admin_menu' ), 1 );
 				add_action( 'admin_menu', array( $this, 'section_menus' ), 1 );
+
+				require_once( 'freemius/start.php' );
 			}
 		}
 		public function admin_menu() {
@@ -30,7 +32,7 @@
 				'manage_options',
 				'straightvisions',
 				'',
-				$this->get_url_core( 'assets/logo_icon.png' ),
+				$this->get_url_core( '../assets/logo_icon.png' ),
 				100
 			);
 			
