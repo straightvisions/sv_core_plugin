@@ -759,6 +759,10 @@ div.sv_setting_checkbox input + label i{
 div.sv_setting_checkbox input:checked + label i{
 	color:#FFF !important;
 }
+div.sv_setting_checkbox_title{
+	line-height:40px;
+	margin:0 0 0 10px;
+}
 
 /* Input - File */
 .sv_setting img {
