@@ -594,13 +594,17 @@ div.log_summary table tr:first-child button#logs_filter::before {
 }
 
 /* Input - General */
-.sv_setting label {
+.sv_setting label:not(.sv_input_label_color) {
 	display: flex;
 	align-items: center;
 	margin-bottom: 5px;
 }
 
-#wpbody .sv_setting input:not([type="checkbox"]):not([type="radio"]),
+.sv_setting label.sv_input_label_color {
+	cursor: inherit;
+}
+
+#wpbody .sv_setting input:not([type="checkbox"]):not([type="radio"]):not(.components-text-control__input),
 #wpbody .sv_setting textarea,
 #wpbody .sv_setting select {
 	color: rgba( 50, 50, 48, 1 );
@@ -615,14 +619,13 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	transition: .25s ease;
 }
 
-.sv_setting input:focus,
-.sv_setting textarea:focus,
-.sv_setting select:focus {
-	border-color: rgba( 50, 50, 48, .5 );
-	box-shadow: none;
+#wpbody .sv_setting input:focus,
+#wpbody .sv_setting textarea:focus,
+#wpbody .sv_setting select:focus {
+	border-color: rgba( 50, 50, 48, .5 ) !important;
 }
 
-.sv_setting input:disabled,
+.sv_setting input:not(.components-text-control__input):disabled,
 .sv_setting textarea:disabled,
 .sv_setting select:disabled {
 	background-color: rgba( 50, 50, 48, .2 );
@@ -821,7 +824,7 @@ div.sv_setting_checkbox_title{
 /* Input - Buttons */
 .sv_dashboard_button,
 input[type="submit"]#submit,
-.sv_setting button,
+.sv_setting button:not(.components-color-picker__saturation-pointer):not(.components-button),
 .sv_setting .button,
 .sv_setting input[type="button"],
 .sv_setting input[type="submit"] {
@@ -843,13 +846,53 @@ input[type="submit"]#submit,
 
 .sv_dashboard_button:hover,
 input[type="submit"]#submit:hover,
-.sv_setting button:hover,
+.sv_setting button:not(.components-color-picker__saturation-pointer):not(.components-button):hover,
 .sv_setting .button:hover,
 .sv_setting input[type="button"]:hover,
 .sv_setting input[type="submit"]:hover {
 	background-color: rgba( 50, 50, 48, 1 );
 	border-color: rgba( 50, 50, 48, 1 );
 	color: #FFFFFF;
+}
+
+/* Color Picker - Inputs */
+.sv_setting .components-color-picker__inputs-wrapper .components-base-control__field {
+	margin: 0 2px;
+}
+
+.sv_setting .components-color-picker__inputs-wrapper input.components-text-control__input {
+	border-radius: 5px;
+	padding: 6px 8px;
+	outline: none;
+	box-shadow: none;
+	height: 34px;
+	border: 1px solid rgba( 50, 50, 48, .2 );
+}
+
+.sv_setting .components-color-picker__inputs-wrapper .components-color-picker__inputs-field {
+	margin-bottom: 0;
+}
+
+.sv_setting .components-color-picker__inputs-wrapper input[type="number"].components-text-control__input {
+	padding: 6px;
+}
+
+.sv_setting button.components-button {
+	color: rgba( 50, 50, 48, .75 );
+	transition: color .25s ease;
+	height: 36px;
+	width: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sv_setting button.components-button:hover,
+.sv_setting button.components-button:focus {
+	color: rgba( 50, 50, 48, 1 );
+	background: none !important;
+	border: 0 !important;
+	box-shadow: none !important;
 }
 
 /* Radio - Switch Style */
