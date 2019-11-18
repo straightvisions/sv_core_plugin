@@ -1604,3 +1604,7 @@ div.log_filter div.wrapper label input {
 	z-index: 500;
 	visibility: visible;
 }
+#update-nag, .update-nag {
+	margin-left: 160px;
+    width: calc(100% - 200px);
+}
