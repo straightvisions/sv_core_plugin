@@ -30,6 +30,19 @@ jQuery(document).on('click', '.sv_radio_switch_wrapper .switch_field input[type=
 	jQuery( this ).removeProp( 'checked' );
 });
 
+/* Input - Color */
+jQuery(document).on('click', '.sv_setting_header > .sv_setting_color_display, .sv_setting_header > h4', function() {
+	const color_picker = jQuery( this ).parent().parent().find('.sv_input_label_color');
+
+	if ( color_picker.hasClass('sv_hidden') ) {
+		jQuery( color_picker ).slideDown();
+		color_picker.removeClass('sv_hidden');
+	} else {
+		jQuery( color_picker ).slideUp();
+		color_picker.addClass('sv_hidden');
+	}
+});
+
 /* Description (Tooltip) */
 jQuery(document).on('click', '.sv_tooltip', function() {
 	jQuery(this).next().toggleClass('open');

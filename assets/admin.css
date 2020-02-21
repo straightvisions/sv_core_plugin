@@ -856,6 +856,46 @@ input[type="submit"]#submit:hover,
 }
 
 /* Color Picker - Inputs */
+.sv_setting_header {
+	margin: 0 0 10px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba( 50, 50, 48, .2 );
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sv_setting_header > h4 {
+	margin: 0 10px 0 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+	transition: opacity .25s ease;
+}
+
+.sv_setting_header > h4:hover,
+.sv_setting_header > h4:focus {
+	opacity: .8;
+}
+
+.sv_setting_header > .sv_setting_color_display {
+	height: 1em;
+	width: 30px;
+	cursor: pointer;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==") left center;
+}
+
+.sv_setting_header > .sv_setting_color_display > .sv_setting_color_value {
+	border: 1px solid rgba( 50, 50, 48, .2 );
+	border-radius: 2px;
+	width: 100%;
+	height: 100%;
+}
+
+.sv_input_label_color.sv_hidden {
+	display: none;
+}
+
 .sv_setting .components-color-picker__inputs-wrapper .components-base-control__field {
 	margin: 0 2px;
 }
