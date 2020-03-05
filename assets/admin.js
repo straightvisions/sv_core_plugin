@@ -246,7 +246,12 @@ jQuery(document).ready(function(){
                 breakpoint_nav += '</ul>';
                 nav_item += breakpoint_nav;
 
-                jQuery( this ).parent().children('.sv_setting_subpages_nav').css('margin-bottom', '40px');
+                const is_size_mobile = jQuery( window ).width > 849 ? true : false;
+
+                if ( is_size_mobile ) {
+                    jQuery( this ).parent().children('.sv_setting_subpages_nav > *.active').css( 'margrin-bottom: 60px' );
+                    jQuery( this ).parent().children('.sv_setting_subpages_nav').css('margin-bottom', '40px');
+				}
 			}
 
 			nav_item += '</li>';
@@ -262,8 +267,9 @@ jQuery(document).ready(function(){
 
 		// Checks if the subpage has a breakpoint nav
 		const has_breakpoint_nav = jQuery( this ).children( '.sv_breakpoint_nav' ).length > 0 ? true : false;
+        const is_size_mobile = jQuery( window ).width > 849 ? true : false;
 
-		if ( has_breakpoint_nav ) {
+		if ( has_breakpoint_nav && ! is_size_mobile ) {
 			jQuery( this ).parent().css( 'margin-bottom', '40px' );
 		} else {
             jQuery( this ).parent().css( 'margin-bottom', '0' );

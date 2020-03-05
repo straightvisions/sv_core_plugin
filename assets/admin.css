@@ -1568,9 +1568,17 @@ div.log_filter div.wrapper label input {
 	position: absolute;
 	top: 100%;
 	width: 100%;
-	justify-content: center;
 	align-items: center;
 	z-index: 10;
+	justify-content: space-around;
+	margin-top: 5px;
+}
+
+@media ( min-width: 850px ) {
+	.sv_setting_subpages_nav > * > .sv_breakpoint_nav {
+		justify-content: center;
+		margin-top: 0;
+	}
 }
 
 .sv_setting_subpages_nav > *.active > .sv_breakpoint_nav {
@@ -1578,12 +1586,18 @@ div.log_filter div.wrapper label input {
 }
 
 .sv_setting_subpages_nav > * > .sv_breakpoint_nav > * {
-	font-size: 24px;
+	font-size: 38px;
 	color: #b1b1b1;
 	margin: 2px 5px 0 5px;
 	padding: 5px;
 	cursor: pointer;
 	transition: color .25s ease;
+}
+
+@media ( min-width: 850px ) {
+	.sv_setting_subpages_nav > * > .sv_breakpoint_nav > * {
+		font-size: 24px;
+	}
 }
 
 .sv_setting_subpages_nav > * > .sv_breakpoint_nav > * > i.sv_rotate {
