@@ -225,7 +225,33 @@ jQuery('#sv_core_expert_mode .sv_setting_checkbox input').on('change', function(
 jQuery(document).ready(function(){
 	jQuery('.sv_setting_subpages').each(function() {
 		jQuery( this ).children('.sv_setting_subpage').each(function( i ) {
-			jQuery( this ).parent().children('.sv_setting_subpages_nav').append( '<li data-id="'+(i+1)+'">'+jQuery( this ).children('h2').text()+'</li>' );
+			// Checks if the subpage contains breakpoint pages
+			let nav_item = '<li data-id="' + ( i + 1 ) + '">' + jQuery( this ).children('h2').text();
+			const mobile = jQuery( this ).children('.sv_setting_subpage_mobile').length > 0 ? true : false;
+
+			if ( mobile ) {
+				let breakpoint_nav = '<ul class="sv_breakpoint_nav">';
+				breakpoint_nav += '<li data-id="mobile" class="active"><i class="fas fa-mobile-alt"></i></li>';
+
+                const mobile_landscape = jQuery( this ).children('.sv_setting_subpage_mobile_landscape').length > 0 ? true : false;
+                const tablet = jQuery( this ).children('.sv_setting_subpage_tablet').length > 0 ? true : false;
+                const tablet_landscape = jQuery( this ).children('.sv_setting_subpage_tablet_landscape').length > 0 ? true : false;
+                const desktop = jQuery( this ).children('.sv_setting_subpage_desktop').length > 0 ? true : false;
+
+                breakpoint_nav += mobile_landscape ? '<li data-id="mobile_landscape"><i class="fas fa-mobile-alt sv_rotate"></i></li>' : '';
+                breakpoint_nav += tablet ? '<li data-id="tablet"><i class="fas fa-tablet-alt"></i></li>' : '';
+                breakpoint_nav += tablet_landscape ? '<li data-id="tablet_landscape"><i class="fas fa-tablet-alt sv_rotate"></i></li>' : '';
+                breakpoint_nav += desktop ? '<li data-id="desktop"><i class="fas fa-desktop"></i></li>' : '';
+
+                breakpoint_nav += '</ul>';
+                nav_item += breakpoint_nav;
+
+                jQuery( this ).parent().children('.sv_setting_subpages_nav').css('margin-bottom', '40px');
+			}
+
+			nav_item += '</li>';
+
+			jQuery( this ).parent().children('.sv_setting_subpages_nav').append( nav_item );
 		});
 	});
 	jQuery('.sv_setting_subpages_nav li:first-child').addClass('active');
@@ -233,8 +259,30 @@ jQuery(document).ready(function(){
 		jQuery( this ).parent().children('*').removeClass('active');
 		jQuery( this ).addClass('active');
 		jQuery( this ).parent().parent().children('.sv_setting_subpage').hide();
+
+		// Checks if the subpage has a breakpoint nav
+		const has_breakpoint_nav = jQuery( this ).children( '.sv_breakpoint_nav' ).length > 0 ? true : false;
+
+		if ( has_breakpoint_nav ) {
+			jQuery( this ).parent().css( 'margin-bottom', '40px' );
+		} else {
+            jQuery( this ).parent().css( 'margin-bottom', '0' );
+		}
+
 		jQuery( this ).parent().parent().children('.sv_setting_subpage:nth-of-type('+jQuery(this).data('id')+')').fadeIn();
 	});
+
+    jQuery('body').on('click', '.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *', function(){
+        jQuery( this ).parent().children('*').removeClass('active');
+        jQuery( this ).addClass('active');
+
+        const subpage_id = jQuery(this).parent().parent().data('id');
+        const subpage = '.sv_setting_subpage:nth-of-type(' + subpage_id + ')';
+        const breakpoint_page = '.sv_setting_subpage_' + jQuery(this).data('id');
+
+        jQuery( this ).parent().parent().parent().parent().children( subpage ).children( 'div' ).hide();
+        jQuery( this ).parent().parent().parent().parent().children( subpage ).children( breakpoint_page ).fadeIn();
+    });
 });
 
 /* ===== Ajax Check ===== */

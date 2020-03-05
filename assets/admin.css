@@ -1535,6 +1535,7 @@ div.log_filter div.wrapper label input {
 }
 
 .sv_setting_subpages_nav > *{
+	position: relative;
 	transition:all 0.5s;
 	display:block;
 	cursor:pointer;
@@ -1559,6 +1560,48 @@ div.log_filter div.wrapper label input {
 }
 .sv_setting_subpages_nav > .active{
 	background-color:#FFF;
+}
+
+/* Subpages - Breakpoint Nav */
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav {
+	display: none;
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	z-index: 10;
+}
+
+.sv_setting_subpages_nav > *.active > .sv_breakpoint_nav {
+	display: flex;
+}
+
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > * {
+	font-size: 24px;
+	color: #b1b1b1;
+	margin: 2px 5px 0 5px;
+	padding: 5px;
+	cursor: pointer;
+	transition: color .25s ease;
+}
+
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > * > i.sv_rotate {
+	transform: rotate(90deg);
+}
+
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *.active,
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *:hover,
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *:focus {
+	color: #444;
+}
+
+	/* Subpages - Breakpoint Pages */
+.sv_setting_subpage > .sv_setting_subpage_mobile_landscape,
+.sv_setting_subpage > .sv_setting_subpage_tablet,
+.sv_setting_subpage > .sv_setting_subpage_tablet_landscape,
+.sv_setting_subpage > .sv_setting_subpage_desktop {
+	display: none;
 }
 
 /* ==== straightvisions Dashboard - Modal ===================================================================== */
