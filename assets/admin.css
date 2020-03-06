@@ -1611,10 +1611,10 @@ div.log_filter div.wrapper label input {
 }
 
 	/* Subpages - Breakpoint Pages */
-.sv_setting_subpage > .sv_setting_subpage_mobile_landscape,
-.sv_setting_subpage > .sv_setting_subpage_tablet,
 .sv_setting_subpage > .sv_setting_subpage_tablet_landscape,
-.sv_setting_subpage > .sv_setting_subpage_desktop {
+.sv_setting_subpage > .sv_setting_subpage_tablet,
+.sv_setting_subpage > .sv_setting_subpage_mobile_landscape,
+.sv_setting_subpage > .sv_setting_subpage_mobile {
 	display: none;
 }
 

@@ -227,29 +227,31 @@ jQuery(document).ready(function(){
 		jQuery( this ).children('.sv_setting_subpage').each(function( i ) {
 			// Checks if the subpage contains breakpoint pages
 			let nav_item = '<li data-id="' + ( i + 1 ) + '">' + jQuery( this ).children('h2').text();
-			const mobile = jQuery( this ).children('.sv_setting_subpage_mobile').length > 0 ? true : false;
+			const desktop = jQuery( this ).children('.sv_setting_subpage_desktop').length > 0 ? true : false;
 
-			if ( mobile ) {
+			if ( desktop ) {
 				let breakpoint_nav = '<ul class="sv_breakpoint_nav">';
-				breakpoint_nav += '<li data-id="mobile" class="active"><i class="fas fa-mobile-alt"></i></li>';
+                breakpoint_nav += '<li data-id="desktop" class="active"><i class="fas fa-desktop"></i></li>';
 
-                const mobile_landscape = jQuery( this ).children('.sv_setting_subpage_mobile_landscape').length > 0 ? true : false;
-                const tablet = jQuery( this ).children('.sv_setting_subpage_tablet').length > 0 ? true : false;
                 const tablet_landscape = jQuery( this ).children('.sv_setting_subpage_tablet_landscape').length > 0 ? true : false;
-                const desktop = jQuery( this ).children('.sv_setting_subpage_desktop').length > 0 ? true : false;
+                const tablet = jQuery( this ).children('.sv_setting_subpage_tablet').length > 0 ? true : false;
+                const mobile_landscape = jQuery( this ).children('.sv_setting_subpage_mobile_landscape').length > 0 ? true : false;
+                const mobile = jQuery( this ).children('.sv_setting_subpage_mobile').length > 0 ? true : false;
 
-                breakpoint_nav += mobile_landscape ? '<li data-id="mobile_landscape"><i class="fas fa-mobile-alt sv_rotate"></i></li>' : '';
-                breakpoint_nav += tablet ? '<li data-id="tablet"><i class="fas fa-tablet-alt"></i></li>' : '';
                 breakpoint_nav += tablet_landscape ? '<li data-id="tablet_landscape"><i class="fas fa-tablet-alt sv_rotate"></i></li>' : '';
-                breakpoint_nav += desktop ? '<li data-id="desktop"><i class="fas fa-desktop"></i></li>' : '';
+                breakpoint_nav += tablet ? '<li data-id="tablet"><i class="fas fa-tablet-alt"></i></li>' : '';
+                breakpoint_nav += mobile_landscape ? '<li data-id="mobile_landscape"><i class="fas fa-mobile-alt sv_rotate"></i></li>' : '';
+                breakpoint_nav += mobile ? '<li data-id="mobile" ><i class="fas fa-mobile-alt"></i></li>' : '';
 
                 breakpoint_nav += '</ul>';
                 nav_item += breakpoint_nav;
 
-                const is_size_mobile = jQuery( window ).width > 849 ? true : false;
+                const is_size_mobile = jQuery( window ).width() < 850 ? true : false;
 
                 if ( is_size_mobile ) {
-                    jQuery( this ).parent().children('.sv_setting_subpages_nav > *.active').css( 'margrin-bottom: 60px' );
+                	console.log( jQuery( this ).parent().children('.sv_setting_subpages_nav'));
+                    jQuery( this ).parent().children('.sv_setting_subpages_nav > .active').css('margin-bottom', '60px');
+				} else {
                     jQuery( this ).parent().children('.sv_setting_subpages_nav').css('margin-bottom', '40px');
 				}
 			}
