@@ -372,3 +372,32 @@ jQuery( 'button[data-sv_admin_modal], input[data-sv_admin_modal]' ).on( 'click',
 jQuery( '.sv_admin_modal .sv_admin_modal_close, .sv_admin_modal .sv_admin_modal_cancel, .sv_admin_modal .sv_admin_modal_submit' ).on( 'click', function() {
 	jQuery( this ).parents( '.sv_admin_modal' ).removeClass( 'show' );
 } );
+
+/* When the number setting has is_units is enabled */
+
+/* When the select unit changes */
+jQuery( '.sv_setting select.sv_input_units' ).on( 'change', function(e) {
+	const number_select = jQuery( e.target ).parent().children( 'input[type="number"]' );
+	const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
+
+	const unit 		= e.target.value;
+	const number 	= number_select.val();
+	const value 	= number + unit;
+
+	data_input.val( value );
+} );
+
+/* When the number value changes */
+jQuery( '.sv_setting input[type="number"]' ).on( 'change', function(e) {
+	const unit_select = jQuery( e.target ).parent().children( 'select.sv_input_units' );
+	
+	if ( unit_select.length > 0 ) {
+		const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
+
+		const unit 		= unit_select.val();
+		const number 	= e.target.value;
+		const value 	= number + unit;
+
+		data_input.val( value );
+	}
+} );
