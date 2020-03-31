@@ -401,3 +401,55 @@ jQuery( '.sv_setting input[type="number"]' ).on( 'change', function(e) {
 		data_input.val( value );
 	}
 } );
+
+/* Input Range & Box Shadow Settings Type */
+function sv_setting_box_shadow( target ) {
+	const parent = jQuery( target ).parents( '.sv_setting_box_shadow' );
+	
+	if ( parent.length > 0 ) {
+		/* Inputs */
+		const horizontal 		= parent.find( '.sv_setting_box_shadow_horizontal' ).children( 'input[type="number"].sv_input_range_indicator' ).val();
+		const horizontal_unit 	= parent.find( '.sv_setting_box_shadow_horizontal' ).children( 'select.sv_input_units' ).val() + ' ';
+
+		const vertical			= parent.find( '.sv_setting_box_shadow_vertical' ).children( 'input[type="number"].sv_input_range_indicator' ).val();
+		const vertical_unit 	= parent.find( '.sv_setting_box_shadow_vertical' ).children( 'select.sv_input_units' ).val() + ' ';
+
+		const blur				= parent.find( '.sv_setting_box_shadow_blur' ).children( 'input[type="number"].sv_input_range_indicator' ).val();
+		const blur_unit 		= parent.find( '.sv_setting_box_shadow_blur' ).children( 'select.sv_input_units' ).val() + ' ';
+
+		const spread			= parent.find( '.sv_setting_box_shadow_spread' ).children( 'input[type="number"].sv_input_range_indicator' ).val();
+		const spread_unit 		= parent.find( '.sv_setting_box_shadow_spread' ).children( 'select.sv_input_units' ).val() + ' ';
+
+		const color				= parent.find( '.sv_setting_box_shadow_color' ).children( 'input[type="color"]' ).val();
+		const inset				= parent.find( '.sv_setting_box_shadow_inset' ).children( 'select' ).val() === 'inset' ? 'inset ' : '';
+
+		/* Value */
+		const box_shadow		= inset + horizontal + horizontal_unit + vertical + vertical_unit + blur + blur_unit + spread + spread_unit + color;
+
+		/* Updates the input value and the preview */
+		parent.children( 'input[data-sv_type="sv_form_field"]' ).val( box_shadow );
+		parent.children( '.sv_setting_preview' ).css( 'box-shadow', box_shadow );
+	}
+}
+
+jQuery(  '.sv_setting .sv_setting_range input[type="range"]' ).on( 'input', function(e) {
+	const number_input = jQuery( e.target ).parent().children('input[type="number"].sv_input_range_indicator');
+
+	number_input.val( e.target.value );
+
+	/* Box Shadow Settings Type */
+	sv_setting_box_shadow( e.target );
+} );
+
+jQuery(  '.sv_setting .sv_setting_range input[type="number"].sv_input_range_indicator' ).on( 'change', function(e) {
+	const range_input = jQuery( e.target ).parent().children('input[type="range"]');
+
+	range_input.val( e.target.value );
+
+	/* Box Shadow Settings Type */
+	sv_setting_box_shadow( e.target );
+} );
+
+jQuery( '.sv_setting .sv_setting_range select.sv_input_units' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
+jQuery( '.sv_setting .sv_setting_box_shadow input[type="color"]' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
+jQuery( '.sv_setting .sv_setting_box_shadow select' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
