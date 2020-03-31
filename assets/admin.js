@@ -420,7 +420,7 @@ function sv_setting_box_shadow( target ) {
 		const spread			= parent.find( '.sv_setting_box_shadow_spread' ).children( 'input[type="number"].sv_input_range_indicator' ).val();
 		const spread_unit 		= parent.find( '.sv_setting_box_shadow_spread' ).children( 'select.sv_input_units' ).val() + ' ';
 
-		const color				= parent.find( '.sv_setting_box_shadow_color' ).children( 'input[type="color"]' ).val();
+		const color				= 'rgba(' + parent.find( '.sv_setting_box_shadow_color' ).children( 'input[type="hidden"]' ).val() + ')';
 		const inset				= parent.find( '.sv_setting_box_shadow_inset' ).children( 'select' ).val() === 'inset' ? 'inset ' : '';
 
 		/* Value */
@@ -432,24 +432,26 @@ function sv_setting_box_shadow( target ) {
 	}
 }
 
-jQuery(  '.sv_setting .sv_setting_range input[type="range"]' ).on( 'input', function(e) {
-	const number_input = jQuery( e.target ).parent().children('input[type="number"].sv_input_range_indicator');
-
-	number_input.val( e.target.value );
-
-	/* Box Shadow Settings Type */
-	sv_setting_box_shadow( e.target );
+jQuery( document ).ready( function() {
+	jQuery(  '.sv_setting .sv_setting_range input[type="range"]' ).on( 'input', function(e) {
+		const number_input = jQuery( e.target ).parent().children('input[type="number"].sv_input_range_indicator');
+	
+		number_input.val( e.target.value );
+	
+		/* Box Shadow Settings Type */
+		sv_setting_box_shadow( e.target );
+	} );
+	
+	jQuery(  '.sv_setting .sv_setting_range input[type="number"].sv_input_range_indicator' ).on( 'change', function(e) {
+		const range_input = jQuery( e.target ).parent().children('input[type="range"]');
+	
+		range_input.val( e.target.value );
+	
+		/* Box Shadow Settings Type */
+		sv_setting_box_shadow( e.target );
+	} );
+	
+	jQuery( '.sv_setting .sv_setting_range select.sv_input_units' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
+	jQuery( '.sv_setting .sv_setting_box_shadow_color input[type="hidden"].sv_input' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
+	jQuery( '.sv_setting .sv_setting_box_shadow select' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
 } );
-
-jQuery(  '.sv_setting .sv_setting_range input[type="number"].sv_input_range_indicator' ).on( 'change', function(e) {
-	const range_input = jQuery( e.target ).parent().children('input[type="range"]');
-
-	range_input.val( e.target.value );
-
-	/* Box Shadow Settings Type */
-	sv_setting_box_shadow( e.target );
-} );
-
-jQuery( '.sv_setting .sv_setting_range select.sv_input_units' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
-jQuery( '.sv_setting .sv_setting_box_shadow input[type="color"]' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
-jQuery( '.sv_setting .sv_setting_box_shadow select' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
