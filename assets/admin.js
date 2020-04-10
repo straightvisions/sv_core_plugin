@@ -31,8 +31,8 @@ jQuery(document).on('click', '.sv_radio_switch_wrapper .switch_field input[type=
 });
 
 /* Input - Color */
-jQuery(document).on('click', '.sv_setting_header > .sv_setting_color_display, .sv_setting_header > h4', function() {
-	const color_picker = jQuery( this ).parent().parent().find('.sv_input_label_color');
+jQuery(document).on('click', '.sv_setting_color_display', function() {
+	const color_picker = jQuery( this ).parent().find('.sv_input_label_color');
 
 	if ( color_picker.hasClass('sv_hidden') ) {
 		jQuery( color_picker ).slideDown();
@@ -44,8 +44,15 @@ jQuery(document).on('click', '.sv_setting_header > .sv_setting_color_display, .s
 });
 
 /* Description (Tooltip) */
-jQuery(document).on('click', '.sv_tooltip', function() {
-	jQuery(this).next().toggleClass('open');
+jQuery(document).on('click', '.sv_setting_header .fa-info-circle', function() {
+	jQuery( this ).parent().find('.sv_setting_description').slideToggle(200);
+});
+
+/* Responsive Select */
+jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_select > *', function() {
+	jQuery(this).parent().parent().parent().find('.sv_setting_responsive').hide();
+	jQuery(this).parent().parent().parent().find('.sv_setting_responsive_'+jQuery(this).data('sv_setting_responsive_select')).show();
+	jQuery(this).prependTo(jQuery(this).parent());
 });
 
 /* Module: Log */
