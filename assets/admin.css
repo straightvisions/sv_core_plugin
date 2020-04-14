@@ -609,6 +609,7 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	right: 14px;
 	border-radius: 5px;
 	border: 1px solid rgba( 50, 50, 48, .2 );
+	z-index:1000;
 }
 .sv_setting_responsive_select:hover{
 	height:auto;
@@ -953,6 +954,7 @@ input[type="submit"]#submit:hover,
 	border-radius: 2px;
 	width: 100%;
 	height: 100%;
+	min-height: 100px;
 }
 
 .sv_input_label_color.sv_hidden {

@@ -8,12 +8,12 @@ function sv_admin_load_page(target){
 	}
 }
 
-jQuery(document).on('click', '.sv_admin_menu_item', function() {
+jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]', function() {
 	if(!jQuery(this).hasClass('active')) {
 		if(jQuery(document).width() < 800) {
-			jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-target')).toggle();
+			jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
 		}
-		sv_admin_load_page(jQuery(this).data('target'));
+		sv_admin_load_page(jQuery(this).data('sv_admin_menu_target'));
 	}
 });
 jQuery(document).on('click', '.sv_admin_mobile_toggle', function() {
