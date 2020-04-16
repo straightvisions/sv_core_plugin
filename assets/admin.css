@@ -195,7 +195,7 @@ section.sv_admin_section .section_head {
 	align-items: center;
 	background-color: #FFF;
 	line-height: 1;
-	z-index: 500;
+	z-index: 500000;
 	position: sticky;
 	top: 0;
 	flex-direction: row;
