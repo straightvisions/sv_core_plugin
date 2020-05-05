@@ -25,6 +25,7 @@
 				require_once( 'freemius/start.php' );
 			}
 		}
+
 		public function admin_menu() {
 			add_menu_page(
 				__( 'straightvisions', 'sv_core' ),
@@ -47,6 +48,7 @@
 				}
 			);
 		}
+
 		public function section_menus(){
 			foreach ( $this->get_instances() as $name => $instance ) {
 				$instance->add_section( $instance );
@@ -62,5 +64,6 @@
 					}
 				);
 			}
+
 		}
 	}

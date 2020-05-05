@@ -1,11 +1,25 @@
+/* NEW FOR LATER EXTENSION */
+if( typeof SVCA == 'undefined' ){
+    SVCA = new function(){
+        this.params = {
+            ajax_url: 	sv_core_admin.ajaxurl,
+            ajax_nonce: sv_core_admin.nonce_admin_ajax,
+        };
+    };
+}
+
 function sv_admin_load_page(target){
-	if(jQuery(target).length) {
+    jQuery(document).ready(function(){
+        SVCA.sections.get(target);
+	});
+
+	/*if(jQuery(target).length) {
 		jQuery('.sv_admin_menu_item.active').removeClass('active');
 		jQuery('*[data-target="' + target + '"]').addClass('active');
 		jQuery('.sv_admin_section').hide();
 		jQuery(target).fadeIn();
 		window.location.hash = target;
-	}
+	}*/
 }
 
 jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]', function() {
@@ -13,6 +27,7 @@ jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]',
 		if(jQuery(document).width() < 800) {
 			jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
 		}
+		//sv_admin_load_page(jQuery(this).data('sv_admin_menu_target'));
 		sv_admin_load_page(jQuery(this).data('sv_admin_menu_target'));
 	}
 });
