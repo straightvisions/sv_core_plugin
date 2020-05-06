@@ -23,15 +23,29 @@ jQuery(document).ready(function($) {
             };
 
             self.get = function(section){
-                $.ajax({
+               let output = '';
+               return $.ajax({
+                    async: false,
                     url: SVCA.params.ajax_url,
                     data: {
-                        'action': 'sv_ajax_get_section',
-                        'section' : section,
-                        'nonce' : SVCA.params.ajax_nonce,
+                        'action'    : 'sv_ajax_get_section',
+                        'section'   : section.replace('#section_',''),
+                        'page'      : SVCA.get_url_param('page'),
+                        'nonce'     : SVCA.get_plugin_localized_nonce(),
                     },
-                    success:function(data) {
-                        self.params.container.prepend(data.html);
+                    success:function(res) {
+                        if(res){
+
+                            self.params.container.prepend( atob(res.data) );
+                            if($(section).length > 0){
+                                $('.sv_admin_menu_item.active').removeClass('active');
+                                self.params.container.find('.sv_admin_section').removeClass('active');
+                                $(section).addClass('active ajax-loaded');
+                                self.params.container.find('.sv_admin_section:not(.active)').remove();
+                                $(section).addClass('active ajax-loaded').fadeIn();
+                            }
+                        }
+
                     },
                     error: function(errorThrown){
                         console.log(errorThrown);
