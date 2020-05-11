@@ -50,6 +50,7 @@ jQuery(document).ready(function($) {
 
             self.close_call = function(){
                 SVCA.loader(false);
+                bind_events(); // remove after admin.js refactoring
                 return self.call = null;
             }
 
@@ -74,7 +75,14 @@ jQuery(document).ready(function($) {
                 SVCA.loader();
                 jQuery('.sv_admin_menu_item').removeClass('active');
                 jQuery('.sv_admin_section').removeClass('active').hide();
-                self.params.container.find('.sv_admin_section:not(.ajax_none)').remove();
+                //self.params.container.find('.sv_admin_section:not(.ajax_none)').remove();
+                // don't reload pages
+                if(jQuery('#section_'+section).length > 0){
+                    SVCA.loader(false);
+                    jQuery('#section_'+section).addClass('active ajax-loaded').fadeIn();
+                    return;
+                }
+
 
                 // call
                 return self.call = jQuery.ajax({
@@ -96,14 +104,12 @@ jQuery(document).ready(function($) {
                             }
 
                         }
-
+                        self.close_call();
                     },
                     error: function(errorThrown){
                         console.log(errorThrown);
-                    },
-                    done: function(){
                         self.close_call();
-                    }
+                    },
                 });
             }
 
@@ -114,22 +120,7 @@ jQuery(document).ready(function($) {
 
     }
 
-    class SV_CORE_SECTIONS{
-        container   = null;
 
-        construct(container){
-
-
-        }
-
-
-
-
-    }
-    // We'll pass this variable to the PHP function example_ajax_request
-
-
-    // This does the ajax request
 
 
 });

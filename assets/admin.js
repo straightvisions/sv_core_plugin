@@ -66,108 +66,241 @@ if( typeof SVCA == 'undefined' ){
     };
 }
 
+// no need for rebind --------------------------------------------------------------------------------------------------
 jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]', function() {
-	if(!jQuery(this).hasClass('active')) {
-		if(jQuery(document).width() < 800) {
-			jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
-		}
+    if(!jQuery(this).hasClass('active')) {
+        if(jQuery(document).width() < 800) {
+            jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
+        }
         SVCA.sections.get( jQuery(this).data('sv_admin_menu_target') );
-	}
+    }
 });
 
 jQuery(document).on('click', '.sv_admin_mobile_toggle', function() {
-	jQuery(jQuery(this).attr('data-target')).toggle();
-	jQuery( 'body' ).toggleClass( 'sv_admin_menu_open' );
+    jQuery(jQuery(this).attr('data-target')).toggle();
+    jQuery( 'body' ).toggleClass( 'sv_admin_menu_open' );
 });
 
 
 /* Input - Radio checkbox style */
 jQuery(document).on('click', '.sv_radio_switch_wrapper .switch_field input[type="radio"]:checked', function() {
-	jQuery( '.sv_radio_switch_wrapper .switch_field input[type="radio"]:not(:checked)' ).prop( 'checked', true );
-	jQuery( this ).removeProp( 'checked' );
+    jQuery( '.sv_radio_switch_wrapper .switch_field input[type="radio"]:not(:checked)' ).prop( 'checked', true );
+    jQuery( this ).removeProp( 'checked' );
 });
 
 /* Input - Color */
 jQuery(document).on('click', '.sv_setting_color_display', function() {
-	const color_picker = jQuery( this ).parent().find('.sv_input_label_color');
+    const color_picker = jQuery( this ).parent().find('.sv_input_label_color');
 
-	if ( color_picker.hasClass('sv_hidden') ) {
-		jQuery( color_picker ).slideDown();
-		color_picker.removeClass('sv_hidden');
-	} else {
-		jQuery( color_picker ).slideUp();
-		color_picker.addClass('sv_hidden');
-	}
+    if ( color_picker.hasClass('sv_hidden') ) {
+        jQuery( color_picker ).slideDown();
+        color_picker.removeClass('sv_hidden');
+    } else {
+        jQuery( color_picker ).slideUp();
+        color_picker.addClass('sv_hidden');
+    }
 });
 
 /* Description (Tooltip) */
 jQuery(document).on('click', '.sv_setting_header .fa-info-circle', function() {
-	jQuery( this ).parent().find('.sv_setting_description').slideToggle(200);
+    jQuery( this ).parent().find('.sv_setting_description').slideToggle(200);
 });
 
 /* Responsive Select */
 jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_select > *', function() {
-	jQuery(this).parent().parent().parent().find('.sv_setting_responsive').hide();
-	jQuery(this).parent().parent().parent().find('.sv_setting_responsive_'+jQuery(this).data('sv_setting_responsive_select')).show();
-	jQuery(this).prependTo(jQuery(this).parent());
+    jQuery(this).parent().parent().parent().find('.sv_setting_responsive').hide();
+    jQuery(this).parent().parent().parent().find('.sv_setting_responsive_'+jQuery(this).data('sv_setting_responsive_select')).show();
+    jQuery(this).prependTo(jQuery(this).parent());
 });
 
 /* Module: Log */
 
 /* Select All */
 jQuery( document ).on( 'click', 'div.log_list input[type="checkbox"]#logs_select', function() {
-	jQuery( 'div.log_list input[type="checkbox"]' ).prop( 'checked', this.checked );
+    jQuery( 'div.log_list input[type="checkbox"]' ).prop( 'checked', this.checked );
 });
 
 /* Select Log */
 jQuery( document ).on( 'click', '.log_list input[type="checkbox"]', function() {
-	if ( jQuery( '.log_list input[type="checkbox"]:checked:not(#logs_select)' ).length > 0) {
-		jQuery( '.log_list #logs_delete' ).css( 'visibility', 'visible' );
-		jQuery( '.log_list #logs_delete' ).css( 'opacity', '1' );
-	} else {
-		jQuery( '.log_list #logs_delete' ).css( 'visibility', 'hidden' );
-		jQuery( '.log_list #logs_delete' ).css ('opacity', '0' );
-	}
+    if ( jQuery( '.log_list input[type="checkbox"]:checked:not(#logs_select)' ).length > 0) {
+        jQuery( '.log_list #logs_delete' ).css( 'visibility', 'visible' );
+        jQuery( '.log_list #logs_delete' ).css( 'opacity', '1' );
+    } else {
+        jQuery( '.log_list #logs_delete' ).css( 'visibility', 'hidden' );
+        jQuery( '.log_list #logs_delete' ).css ('opacity', '0' );
+    }
 });
 
 /* Click Log */
 jQuery( document ).on( 'click', 'div.log_list tr.log', function() {
-	var log_id		= jQuery( this ).attr( 'ID' )
-	var table 		= jQuery( 'div.log_details table#log_' + log_id );
+    var log_id		= jQuery( this ).attr( 'ID' )
+    var table 		= jQuery( 'div.log_details table#log_' + log_id );
 
-	jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
-	jQuery( 'div.sv_log' ).removeClass( 'show_filter' );
+    jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
+    jQuery( 'div.sv_log' ).removeClass( 'show_filter' );
 
-	if( jQuery( 'div.sv_log' ).hasClass( 'show_details' ) ) {
-		var table_id	= jQuery( 'div.log_details table.show' ).attr( 'ID' );
+    if( jQuery( 'div.sv_log' ).hasClass( 'show_details' ) ) {
+        var table_id	= jQuery( 'div.log_details table.show' ).attr( 'ID' );
 
-		if( 'log_' + log_id != table_id ) {
-			jQuery( this ).addClass( 'active' );
-			jQuery( 'div.log_details table.show' ).toggleClass( 'show' );
-			table.toggleClass( 'show' );
-		} else {
-			table.toggleClass( 'show' );
-			jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
-		}
-	} else {
-		jQuery( this ).addClass( 'active' );
-		jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
-		table.toggleClass( 'show' );
-	}
+        if( 'log_' + log_id != table_id ) {
+            jQuery( this ).addClass( 'active' );
+            jQuery( 'div.log_details table.show' ).toggleClass( 'show' );
+            table.toggleClass( 'show' );
+        } else {
+            table.toggleClass( 'show' );
+            jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
+        }
+    } else {
+        jQuery( this ).addClass( 'active' );
+        jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
+        table.toggleClass( 'show' );
+    }
 });
 
 /* Click Filter */
 jQuery( document ).on( 'click', 'div.log_summary button#logs_filter', function() {
-	jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
-	jQuery( 'div.sv_log' ).removeClass( 'show_details' );
-	jQuery( 'div.log_details table' ).removeClass( 'show' );
-	jQuery( 'div.sv_log' ).toggleClass( 'show_filter' );
+    jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
+    jQuery( 'div.sv_log' ).removeClass( 'show_details' );
+    jQuery( 'div.log_details table' ).removeClass( 'show' );
+    jQuery( 'div.sv_log' ).toggleClass( 'show_filter' );
 });
 
 /* set form referer for redirect to current subpage on submit */
 jQuery( document ).on('submit', 'section.sv_admin_section form', function(e){
-	jQuery(this).find('input[name="_wp_http_referer"]').val(jQuery(location).attr('href'));
+    jQuery(this).find('input[name="_wp_http_referer"]').val(jQuery(location).attr('href'));
 });
+
+
+// needs for rebind ----------------------------------------------------------------------------------------------------
+function bind_events(){ //@todo remove deprecated functions and move all of this into admin class plugins
+    jQuery( '.sv_dashboard_content input[type="checkbox"], .sv_dashboard_content input[type="radio"]' ).unbind().on( 'click', function() {
+        update_option( jQuery( this ).parents( 'form' ) );
+    });
+
+    jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).unbind().on( 'focusin', function() {
+        if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
+            jQuery( this ).data( 'val', jQuery( this ).val() );
+        }
+    });
+
+
+    jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).unbind().on( 'change', function() {
+        if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
+            var prev 	= jQuery( this ).data( 'val' );
+            var current = jQuery( this ).val();
+
+            if ( current !== prev ) {
+                update_option( jQuery( this ).parents( 'form' ) );
+            }
+        }
+    });
+
+
+    jQuery( '.sv_dashboard_content textarea' ).unbind().on( 'change', function() {
+        var prev 	= jQuery( this ).data( 'text' );
+        var current = jQuery( this ).val();
+
+        if ( current !== prev ) {
+            update_option( jQuery( this ).parents( 'form' ) );
+        }
+    });
+
+    jQuery('#sv_core_expert_mode .sv_setting_checkbox input').unbind().on('change', function(){
+        jQuery.post( sv_core_admin.ajaxurl, {
+                action : 'sv_core_expert_mode',
+                nonce : sv_core_admin.nonce_expert_mode,
+                state : jQuery(this).val()
+            },
+            function(response) {
+                response = JSON.parse(response);
+
+                if(response.status === 'success') {
+                    show_notice( response.message, 'success' );
+                } else {
+                    show_notice( response.message, 'error' );
+                }
+            });
+    });
+
+    jQuery(  '.sv_setting .sv_setting_range input[type="range"]' ).unbind().on( 'input', function(e) {
+        const number_input = jQuery( e.target ).parent().children('input[type="number"].sv_input_range_indicator');
+
+        number_input.val( e.target.value );
+
+        /* Box Shadow Settings Type */
+        sv_setting_box_shadow( e.target );
+    } );
+
+    jQuery(  '.sv_setting .sv_setting_range input[type="number"].sv_input_range_indicator' ).unbind().on( 'change', function(e) {
+        const range_input = jQuery( e.target ).parent().children('input[type="range"]');
+
+        range_input.val( e.target.value );
+
+        /* Box Shadow Settings Type */
+        sv_setting_box_shadow( e.target );
+    } );
+
+    jQuery( '.sv_setting .sv_setting_range select.sv_input_units' ).unbind().on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
+    jQuery( '.sv_setting .sv_setting_box_shadow_color input[type="hidden"].sv_input' ).unbind().on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
+    jQuery( '.sv_setting .sv_setting_box_shadow select' ).unbind().on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
+
+
+    jQuery( 'button[data-sv_admin_modal], input[data-sv_admin_modal]' ).unbind().on( 'click', function() {
+    	console.log('click');
+        let title 	= jQuery( this ).data( 'sv_admin_modal' )[0].title;
+        let desc 	= jQuery( this ).data( 'sv_admin_modal' )[0].desc;
+        let type	= jQuery( this ).data( 'sv_admin_modal' )[0].type;
+        let args	= jQuery( this ).data( 'sv_admin_modal' )[0].args ? jQuery( this ).data( 'sv_admin_modal' )[0].args : {};
+        let ajax	= jQuery( this ).data( 'sv_admin_ajax' );
+
+        if ( ajax !== 'undefined' ) {
+            args.ajax = ajax;
+        }
+
+        show_modal( title, desc, type, args );
+    } );
+
+    jQuery( '.sv_admin_modal .sv_admin_modal_close, .sv_admin_modal .sv_admin_modal_cancel, .sv_admin_modal .sv_admin_modal_submit' ).unbind().on( 'click', function() {
+        jQuery( this ).parents( '.sv_admin_modal' ).removeClass( 'show' );
+    } );
+
+    /* When the number setting has is_units is enabled */
+
+    /* When the select unit changes */
+    jQuery( '.sv_setting select.sv_input_units' ).unbind().on( 'change', function(e) {
+        const number_select = jQuery( e.target ).parent().children( 'input[type="number"]' );
+        const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
+
+        const unit 		= e.target.value;
+        const number 	= number_select.val();
+        const value 	= number + unit;
+
+        data_input.val( value );
+    } );
+
+    /* When the number value changes */
+    jQuery( '.sv_setting input[type="number"]' ).unbind().on( 'change', function(e) {
+        const unit_select = jQuery( e.target ).parent().children( 'select.sv_input_units' );
+
+        if ( unit_select.length > 0 ) {
+            const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
+
+            const unit 		= unit_select.val();
+            const number 	= e.target.value;
+            const value 	= number + unit;
+
+            data_input.val( value );
+        }
+    } );
+
+}; // ----------------------------------------------
+
+
+// very important ;)
+jQuery(document).ready(function(){
+    bind_events();
+});
+
 
 /* ===== Ajax Save Settings ===== */
 function show_notice( msg, type = 'info' ) {
@@ -237,55 +370,8 @@ jQuery('.sv_dashboard_content form').submit( function ( e ) {
 });
 */
 
-jQuery( '.sv_dashboard_content input[type="checkbox"], .sv_dashboard_content input[type="radio"]' ).on( 'click', function() {
-	update_option( jQuery( this ).parents( 'form' ) );
-});
 
-jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).on( 'focusin', function() {
-	if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
-		jQuery( this ).data( 'val', jQuery( this ).val() );
-	}
-});
-
-
-jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).on( 'change', function() {
-	if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
-		var prev 	= jQuery( this ).data( 'val' );
-		var current = jQuery( this ).val();
-
-		if ( current !== prev ) {
-			update_option( jQuery( this ).parents( 'form' ) );
-		}
-	}
-});
-
-
-jQuery( '.sv_dashboard_content textarea' ).on( 'change', function() {
-	var prev 	= jQuery( this ).data( 'text' );
-	var current = jQuery( this ).val();
-
-	if ( current !== prev ) {
-		update_option( jQuery( this ).parents( 'form' ) );
-	}
-});
-
-jQuery('#sv_core_expert_mode .sv_setting_checkbox input').on('change', function(){
-	jQuery.post( sv_core_admin.ajaxurl, {
-			action : 'sv_core_expert_mode',
-			nonce : sv_core_admin.nonce_expert_mode,
-			state : jQuery(this).val()
-		},
-		function(response) {
-			response = JSON.parse(response);
-
-			if(response.status === 'success') {
-				show_notice( response.message, 'success' );
-			} else {
-				show_notice( response.message, 'error' );
-			}
-	});
-});
-
+// deprecated
 jQuery(document).ready(function(){
 	jQuery('.sv_setting_subpages').each(function() {
 		jQuery( this ).children('.sv_setting_subpage').each(function( i ) {
@@ -419,52 +505,6 @@ function get_modal_content( type, args ) {
 	return content;
 }
 
-jQuery( 'button[data-sv_admin_modal], input[data-sv_admin_modal]' ).on( 'click', function() {
-	let title 	= jQuery( this ).data( 'sv_admin_modal' )[0].title;
-	let desc 	= jQuery( this ).data( 'sv_admin_modal' )[0].desc;
-	let type	= jQuery( this ).data( 'sv_admin_modal' )[0].type;
-	let args	= jQuery( this ).data( 'sv_admin_modal' )[0].args ? jQuery( this ).data( 'sv_admin_modal' )[0].args : {};
-	let ajax	= jQuery( this ).data( 'sv_admin_ajax' );
-
-	if ( ajax !== 'undefined' ) {
-		args.ajax = ajax;
-	}
-
-	show_modal( title, desc, type, args );
-} );
-
-jQuery( '.sv_admin_modal .sv_admin_modal_close, .sv_admin_modal .sv_admin_modal_cancel, .sv_admin_modal .sv_admin_modal_submit' ).on( 'click', function() {
-	jQuery( this ).parents( '.sv_admin_modal' ).removeClass( 'show' );
-} );
-
-/* When the number setting has is_units is enabled */
-
-/* When the select unit changes */
-jQuery( '.sv_setting select.sv_input_units' ).on( 'change', function(e) {
-	const number_select = jQuery( e.target ).parent().children( 'input[type="number"]' );
-	const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
-
-	const unit 		= e.target.value;
-	const number 	= number_select.val();
-	const value 	= number + unit;
-
-	data_input.val( value );
-} );
-
-/* When the number value changes */
-jQuery( '.sv_setting input[type="number"]' ).on( 'change', function(e) {
-	const unit_select = jQuery( e.target ).parent().children( 'select.sv_input_units' );
-	
-	if ( unit_select.length > 0 ) {
-		const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
-
-		const unit 		= unit_select.val();
-		const number 	= e.target.value;
-		const value 	= number + unit;
-
-		data_input.val( value );
-	}
-} );
 
 /* Input Range & Box Shadow Settings Type */
 function sv_setting_box_shadow( target ) {
@@ -495,27 +535,3 @@ function sv_setting_box_shadow( target ) {
 		parent.children( '.sv_setting_preview' ).css( 'box-shadow', box_shadow );
 	}
 }
-
-jQuery( document ).ready( function() {
-	jQuery(  '.sv_setting .sv_setting_range input[type="range"]' ).on( 'input', function(e) {
-		const number_input = jQuery( e.target ).parent().children('input[type="number"].sv_input_range_indicator');
-	
-		number_input.val( e.target.value );
-	
-		/* Box Shadow Settings Type */
-		sv_setting_box_shadow( e.target );
-	} );
-	
-	jQuery(  '.sv_setting .sv_setting_range input[type="number"].sv_input_range_indicator' ).on( 'change', function(e) {
-		const range_input = jQuery( e.target ).parent().children('input[type="range"]');
-	
-		range_input.val( e.target.value );
-	
-		/* Box Shadow Settings Type */
-		sv_setting_box_shadow( e.target );
-	} );
-	
-	jQuery( '.sv_setting .sv_setting_range select.sv_input_units' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
-	jQuery( '.sv_setting .sv_setting_box_shadow_color input[type="hidden"].sv_input' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
-	jQuery( '.sv_setting .sv_setting_box_shadow select' ).on( 'change', function( e ) { sv_setting_box_shadow( e.target ) } );
-} );
