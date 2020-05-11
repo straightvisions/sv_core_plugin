@@ -94,7 +94,7 @@ div.sv_admin_menu .sv_admin_menu_item {
 	text-decoration: none;
 	color: rgba(43, 45, 48, 1);
 	border-left: 2px solid transparent;
-	transition: .3s ease;
+	transition: none;
 	outline: none;
 	box-shadow: none;
 	background-color: #FFF;
@@ -124,7 +124,7 @@ div.sv_admin_menu div.sv_admin_mobile_toggle {
 
 div#sv_admin_menu_body {
 	display: none;
-	transition: .3s ease;
+	transition: none;
 	max-height: calc( 100vh - ( 80px + 46px ) );
 	overflow-y: auto;
 }
@@ -392,7 +392,7 @@ div.sv_admin_menu .sv_admin_menu_item::before {
 	top: 40%;
 	line-height: 0;
 	color: rgba(43, 45, 48, .5);
-	transition: .3s ease;
+	transition: none;
 }
 
 section.sv_admin_section .section_head::before,
