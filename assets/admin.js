@@ -71,7 +71,6 @@ jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]',
 		if(jQuery(document).width() < 800) {
 			jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
 		}
-		console.log((jQuery(this).data('sv_admin_menu_target')));
         SVCA.sections.get( jQuery(this).data('sv_admin_menu_target') );
 	}
 });
@@ -314,7 +313,7 @@ jQuery(document).ready(function(){
                 const is_size_mobile = jQuery( window ).width() < 850 ? true : false;
 
                 if ( is_size_mobile ) {
-                	console.log( jQuery( this ).parent().children('.sv_setting_subpages_nav'));
+                	// console.log( jQuery( this ).parent().children('.sv_setting_subpages_nav'));
                     jQuery( this ).parent().children('.sv_setting_subpages_nav > .active').css('margin-bottom', '60px');
 				} else {
                     jQuery( this ).parent().children('.sv_setting_subpages_nav').css('margin-bottom', '40px');
