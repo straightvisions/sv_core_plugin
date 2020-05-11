@@ -9,6 +9,19 @@ if( typeof SVCA == 'undefined' ){
             };
         };
 
+        this.loader = function(show){
+        	const loader = jQuery('.sv_dashboard_ajax_loader')
+        	if(typeof show == 'undefined'){
+        		show = true;
+			}
+
+			if(show == true){
+                loader.show();
+			}else{
+                loader.hide();
+			}
+		};
+
         this.get_url_param = function(param_name){
             let result 	= null;
             let tmp 	= [];
@@ -22,6 +35,23 @@ if( typeof SVCA == 'undefined' ){
             return result;
 		};
 
+        this.set_url_param = function(params){
+            const url 			= new URL( window.location.href );
+            const search_params = url.searchParams;
+
+            for (var key of Object.keys(params)) {
+                search_params.set(key, params[key]);
+            }
+
+			url.search 		= search_params.toString();
+			const new_url	= url.toString();
+
+        	//@todo add support for urls without any param
+            history.pushState({
+                id: 'homepage'
+            }, '', new_url);
+        };
+
         this.get_plugin_localized_nonce = function(){
             let output = 'xxx';
 
@@ -30,24 +60,10 @@ if( typeof SVCA == 'undefined' ){
             }
 
             return output;
-        }
+        };
 
         this.init();
     };
-}
-
-function sv_admin_load_page(target){
-    jQuery(document).ready(function(){
-        SVCA.sections.get(target);
-	});
-
-	/*if(jQuery(target).length) {
-		jQuery('.sv_admin_menu_item.active').removeClass('active');
-		jQuery('*[data-target="' + target + '"]').addClass('active');
-		jQuery('.sv_admin_section').hide();
-		jQuery(target).fadeIn();
-		window.location.hash = target;
-	}*/
 }
 
 jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]', function() {
@@ -55,17 +71,16 @@ jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]',
 		if(jQuery(document).width() < 800) {
 			jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
 		}
-		//sv_admin_load_page(jQuery(this).data('sv_admin_menu_target'));
-		sv_admin_load_page(jQuery(this).data('sv_admin_menu_target'));
+		console.log((jQuery(this).data('sv_admin_menu_target')));
+        SVCA.sections.get( jQuery(this).data('sv_admin_menu_target') );
 	}
 });
+
 jQuery(document).on('click', '.sv_admin_mobile_toggle', function() {
 	jQuery(jQuery(this).attr('data-target')).toggle();
 	jQuery( 'body' ).toggleClass( 'sv_admin_menu_open' );
 });
-jQuery(document).ready(function(){
-	sv_admin_load_page(window.location.hash);
-});
+
 
 /* Input - Radio checkbox style */
 jQuery(document).on('click', '.sv_radio_switch_wrapper .switch_field input[type="radio"]:checked', function() {

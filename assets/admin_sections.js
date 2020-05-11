@@ -10,22 +10,74 @@ jQuery(document).ready(function($) {
                 container: null,
             };
 
+            self.call = null;
+
             self.init = function(params){
                 console.log('SVCA-SECTIONS init');
                 if(typeof params != 'undefined'){
-                    if(typeof params.container != 'undefined' && $(params.container).length > 0){
-                        self.params.container = $(params.container);
+                    if(typeof params.container != 'undefined' && jQuery(params.container).length > 0){
+                        self.params.container = jQuery(params.container);
                     }else{
                         console.log('ERROR - container element not found');
                     }
                 }
+
+                // load first page or deep link
+                const section = SVCA.get_url_param('section');
+
+                if(jQuery('#section_'+section).length > 0){
+                    self.params.container.children('.sv_admin_section').first().fadeIn();
+                }else{
+                    if(jQuery('#section_'+section).hasClass('ajax_none')){
+                        jQuery('#section_'+section).fadeIn();
+                    }else{
+                        self.get(section);
+                    }
+
+                }
+
                 console.log('SVCA-SECTIONS init - done');
             };
 
+            self.get_call = function(){
+                return self.call;
+            }
+
+            self.stop_call = function(){
+                SVCA.loader(false);
+                self.call.abort();
+            }
+
+            self.close_call = function(){
+                SVCA.loader(false);
+                return self.call = null;
+            }
+
             self.get = function(section){
-               let output = '';
-               return $.ajax({
-                    async: false,
+                if(typeof section == 'undefined' || section == null){
+                    return;
+                }
+
+                if( this.get_call() != null ){
+                    self.stop_call();
+                }
+
+                let output = '';
+                section    = section.replace('#section_','');
+
+                // update URL
+                SVCA.set_url_param({
+                    'section': section,
+                });
+
+                // prepare content area
+                SVCA.loader();
+                jQuery('.sv_admin_menu_item').removeClass('active');
+                jQuery('.sv_admin_section').removeClass('active').hide();
+                self.params.container.find('.sv_admin_section:not(.ajax_none)').remove();
+
+                // call
+                return self.call = jQuery.ajax({
                     url: SVCA.params.ajax_url,
                     data: {
                         'action'    : 'sv_ajax_get_section',
@@ -34,21 +86,23 @@ jQuery(document).ready(function($) {
                         'nonce'     : SVCA.get_plugin_localized_nonce(),
                     },
                     success:function(res) {
+                        SVCA.loader(false); // hotfix to force loader hide
                         if(res){
-
-                            self.params.container.prepend( atob(res.data) );
-                            if($(section).length > 0){
-                                $('.sv_admin_menu_item.active').removeClass('active');
-                                self.params.container.find('.sv_admin_section').removeClass('active');
-                                $(section).addClass('active ajax-loaded');
-                                self.params.container.find('.sv_admin_section:not(.active)').remove();
-                                $(section).addClass('active ajax-loaded').fadeIn();
+                            const html = atob(res.data);
+                            self.params.container.prepend( html );
+                            section = '#section_' + section;
+                            if(jQuery(section).length > 0){
+                                jQuery(section).addClass('active ajax-loaded').fadeIn();
                             }
+
                         }
 
                     },
                     error: function(errorThrown){
                         console.log(errorThrown);
+                    },
+                    done: function(){
+                        self.close_call();
                     }
                 });
             }
