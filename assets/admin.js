@@ -173,6 +173,9 @@ jQuery( document ).on('submit', 'section.sv_admin_section form', function(e){
 
 // needs for rebind ----------------------------------------------------------------------------------------------------
 function bind_events(){ //@todo remove deprecated functions and move all of this into admin class plugins
+
+    add_subpage_nav();
+
     jQuery( '.sv_dashboard_content input[type="checkbox"], .sv_dashboard_content input[type="radio"]' ).unbind().on( 'click', function() {
         update_option( jQuery( this ).parents( 'form' ) );
     });
@@ -293,7 +296,17 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
         }
     } );
 
-}; // ----------------------------------------------
+    /* ===== Ajax Check ===== */
+    jQuery( 'button[data-sv_admin_ajax], input[data-sv_admin_ajax]' ).on( 'click', function() {
+        let ajax = jQuery( this ).data( 'sv_admin_ajax' );
+        let is_modal = jQuery( this ).data( 'sv_admin_modal' ) ? true : false;
+
+        if ( ! is_modal ) {
+            sv_admin_ajax_call( ajax );
+        }
+    } );
+
+} // ----------------------------------------------
 
 
 // very important ;)
@@ -370,17 +383,21 @@ jQuery('.sv_dashboard_content form').submit( function ( e ) {
 });
 */
 
+function add_subpage_nav(){
+    jQuery('.sv_setting_subpages').each(function() {
 
-// deprecated
-jQuery(document).ready(function(){
-	jQuery('.sv_setting_subpages').each(function() {
-		jQuery( this ).children('.sv_setting_subpage').each(function( i ) {
-			// Checks if the subpage contains breakpoint pages
-			let nav_item = '<li data-id="' + ( i + 1 ) + '">' + jQuery( this ).children('h2').text();
-			const desktop = jQuery( this ).children('.sv_setting_subpage_desktop').length > 0 ? true : false;
+        if( jQuery( this ).children('.sv_setting_subpages_nav').children().length > 0 ){
+            return; // skip
+        }
+        
+        jQuery( this ).children('.sv_setting_subpage').each(function( i ) {
 
-			if ( desktop ) {
-				let breakpoint_nav = '<ul class="sv_breakpoint_nav">';
+            // Checks if the subpage contains breakpoint pages
+            let nav_item = '<li data-id="' + ( i + 1 ) + '">' + jQuery( this ).children('h2').text();
+            const desktop = jQuery( this ).children('.sv_setting_subpage_desktop').length > 0 ? true : false;
+
+            if ( desktop ) {
+                let breakpoint_nav = '<ul class="sv_breakpoint_nav">';
                 breakpoint_nav += '<li data-id="desktop" class="active"><i class="fas fa-desktop"></i></li>';
 
                 const tablet_landscape = jQuery( this ).children('.sv_setting_subpage_tablet_landscape').length > 0 ? true : false;
@@ -399,36 +416,36 @@ jQuery(document).ready(function(){
                 const is_size_mobile = jQuery( window ).width() < 850 ? true : false;
 
                 if ( is_size_mobile ) {
-                	// console.log( jQuery( this ).parent().children('.sv_setting_subpages_nav'));
+                    // console.log( jQuery( this ).parent().children('.sv_setting_subpages_nav'));
                     jQuery( this ).parent().children('.sv_setting_subpages_nav > .active').css('margin-bottom', '60px');
-				} else {
+                } else {
                     jQuery( this ).parent().children('.sv_setting_subpages_nav').css('margin-bottom', '40px');
-				}
-			}
+                }
+            }
 
-			nav_item += '</li>';
+            nav_item += '</li>';
 
-			jQuery( this ).parent().children('.sv_setting_subpages_nav').append( nav_item );
-		});
-	});
-	jQuery('.sv_setting_subpages_nav li:first-child').addClass('active');
-	jQuery('body').on('click', '.sv_setting_subpages_nav > *', function(){
-		jQuery( this ).parent().children('*').removeClass('active');
-		jQuery( this ).addClass('active');
-		jQuery( this ).parent().parent().children('.sv_setting_subpage').hide();
+            jQuery( this ).parent().children('.sv_setting_subpages_nav').append( nav_item );
+        });
+    });
+    jQuery('.sv_setting_subpages_nav li:first-child').addClass('active');
+    jQuery('body').on('click', '.sv_setting_subpages_nav > *', function(){
+        jQuery( this ).parent().children('*').removeClass('active');
+        jQuery( this ).addClass('active');
+        jQuery( this ).parent().parent().children('.sv_setting_subpage').hide();
 
-		// Checks if the subpage has a breakpoint nav
-		const has_breakpoint_nav = jQuery( this ).children( '.sv_breakpoint_nav' ).length > 0 ? true : false;
+        // Checks if the subpage has a breakpoint nav
+        const has_breakpoint_nav = jQuery( this ).children( '.sv_breakpoint_nav' ).length > 0 ? true : false;
         const is_size_mobile = jQuery( window ).width > 849 ? true : false;
 
-		if ( has_breakpoint_nav && ! is_size_mobile ) {
-			jQuery( this ).parent().css( 'margin-bottom', '40px' );
-		} else {
+        if ( has_breakpoint_nav && ! is_size_mobile ) {
+            jQuery( this ).parent().css( 'margin-bottom', '40px' );
+        } else {
             jQuery( this ).parent().css( 'margin-bottom', '0' );
-		}
+        }
 
-		jQuery( this ).parent().parent().children('.sv_setting_subpage:nth-of-type('+jQuery(this).data('id')+')').fadeIn();
-	});
+        jQuery( this ).parent().parent().children('.sv_setting_subpage:nth-of-type('+jQuery(this).data('id')+')').fadeIn();
+    });
 
     jQuery('body').on('click', '.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *', function(){
         jQuery( this ).parent().children('*').removeClass('active');
@@ -441,17 +458,9 @@ jQuery(document).ready(function(){
         jQuery( this ).parent().parent().parent().parent().children( subpage ).children( 'div' ).hide();
         jQuery( this ).parent().parent().parent().parent().children( subpage ).children( breakpoint_page ).fadeIn();
     });
-});
+}
 
-/* ===== Ajax Check ===== */
-jQuery( 'button[data-sv_admin_ajax], input[data-sv_admin_ajax]' ).on( 'click', function() {
-	let ajax = jQuery( this ).data( 'sv_admin_ajax' );
-	let is_modal = jQuery( this ).data( 'sv_admin_modal' ) ? true : false;
 
-	if ( ! is_modal ) {
-		sv_admin_ajax_call( ajax );
-	}
-} );
 
 function sv_admin_ajax_call( data, modal = false ) {
 	if ( data[0].nonce === 'undefined' ) return false;
