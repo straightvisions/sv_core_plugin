@@ -108,9 +108,45 @@ jQuery(document).on('click', '.sv_setting_header .fa-info-circle', function() {
 
 /* Responsive Select */
 jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_select > *', function() {
-    jQuery(this).parent().parent().parent().find('.sv_setting_responsive').hide();
-    jQuery(this).parent().parent().parent().find('.sv_setting_responsive_'+jQuery(this).data('sv_setting_responsive_select')).show();
+    jQuery(this).parent().parent().parent().find('.sv_setting_responsive').removeClass('active').hide();
+    jQuery(this).parent().parent().parent().find('.sv_setting_responsive_'+jQuery(this).data('sv_setting_responsive_select')).addClass('active').show();
     jQuery(this).prependTo(jQuery(this).parent());
+});
+
+/* Responsive Inherit Overwrite */
+jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', function() {
+    const container = jQuery(this).closest('.sv_setting');
+    const settings_source = container.children('.active').first();
+    const settings_source_inputs = settings_source.find('.sv_input');
+
+    settings_source_inputs.each(function(){
+        const el    = jQuery(this);
+        let id      = el.attr('id');
+
+        if(typeof id == 'undefined' || id == ''){
+            return; // block group settings - please fix this
+        }
+        const value = el.val();
+
+        /*hackish, use react or states */
+        id = id.replace('[mobile]','[XXX]');
+        id = id.replace('[mobile_landscape]','[XXX]');
+        id = id.replace('[tablet]','[XXX]');
+        id = id.replace('[tablet_landscape]','[XXX]');
+        id = id.replace('[desktop]','[XXX]');
+
+        container.find('.sv_input#'+id.replace('[XXX]','\\[mobile\\]')).val(value);
+        container.find('.sv_input#'+id.replace('[XXX]','\\[mobile_landscape\\]')).val(value);
+        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet\\]')).val(value);
+        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_landscape\\]')).val(value);
+        container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
+
+
+    });
+
+    show_notice('Setting copied to breakpoints.');
+    update_option( jQuery( this ).closest( 'form' ) );
+
 });
 
 /* Module: Log */
