@@ -606,7 +606,7 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	display:block;
 }
 
-.sv_setting_responsive_select{
+.sv_setting_responsive_headline_button{
 	width:35px;
 	height:35px;
 	overflow:hidden;
@@ -619,17 +619,21 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	border: 1px solid rgba( 50, 50, 48, .2 );
 	z-index:1;
 }
+.sv_setting_responsive_force{
+	right:56px;
+}
 .sv_setting_responsive_select:hover{
 	height:auto;
 	z-index:1024;
 }
-.sv_setting_responsive_select > *{
+.sv_setting_responsive_headline_button > *{
 	width:15px;
 	height:15px;
 	padding:10px;
 	display:block;
 	cursor:pointer;
 }
+.sv_setting_responsive_headline_button,
 .sv_setting_responsive_select > *:hover, .sv_setting_responsive_select > *:first-child{
 	color:#328CE6;
 }
