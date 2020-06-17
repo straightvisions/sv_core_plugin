@@ -104,6 +104,7 @@ jQuery(document).ready(function($) {
                             }
 
                         }
+						jQuery('body').trigger('sv_admin_section_loaded');
                         self.close_call();
                     },
                     error: function(errorThrown){

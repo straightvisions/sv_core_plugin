@@ -110,7 +110,10 @@ jQuery(document).on('click', '.sv_setting_header .fa-info-circle', function() {
 jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_select > *', function() {
     jQuery(this).parent().parent().parent().find('.sv_setting_responsive').removeClass('active').hide();
     jQuery(this).parent().parent().parent().find('.sv_setting_responsive_'+jQuery(this).data('sv_setting_responsive_select')).addClass('active').show();
-    jQuery(this).prependTo(jQuery(this).parent());
+
+    // highlight selector
+	jQuery(this).parent().find('i').removeClass('active')
+	jQuery(this).addClass('active')
 });
 
 /* Responsive Inherit Overwrite */
