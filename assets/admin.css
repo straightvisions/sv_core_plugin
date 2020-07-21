@@ -1,3 +1,6 @@
+#wpfooter{
+	display:none; //@todo hotfix - replace this after ux is polished
+}
 /* ==== Scrollbar =================================================================================================== */
 ::-webkit-scrollbar {
 	width: 10px;
@@ -91,7 +94,7 @@ div.sv_admin_menu .sv_admin_menu_item {
 	text-decoration: none;
 	color: rgba(43, 45, 48, 1);
 	border-left: 2px solid transparent;
-	transition: .3s ease;
+	transition: none;
 	outline: none;
 	box-shadow: none;
 	background-color: #FFF;
@@ -121,7 +124,7 @@ div.sv_admin_menu div.sv_admin_mobile_toggle {
 
 div#sv_admin_menu_body {
 	display: none;
-	transition: .3s ease;
+	transition: none;
 	max-height: calc( 100vh - ( 80px + 46px ) );
 	overflow-y: auto;
 }
@@ -195,7 +198,7 @@ section.sv_admin_section .section_head {
 	align-items: center;
 	background-color: #FFF;
 	line-height: 1;
-	z-index: 500;
+	z-index: 500000;
 	position: sticky;
 	top: 0;
 	flex-direction: row;
@@ -389,7 +392,7 @@ div.sv_admin_menu .sv_admin_menu_item::before {
 	top: 40%;
 	line-height: 0;
 	color: rgba(43, 45, 48, .5);
-	transition: .3s ease;
+	transition: none;
 }
 
 section.sv_admin_section .section_head::before,
@@ -543,7 +546,8 @@ div.log_summary table tr:first-child button#logs_filter::before {
 }
 
 .sv_dashboard_content table.form-table th {
-	display: none;
+	padding:0;
+	width:auto;
 }
 
 .sv_dashboard_content table.form-table td {
@@ -561,6 +565,9 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	margin-bottom:12px;
 	margin-right:12px;
 	box-sizing:border-box;
+	position:relative;
+	display: flex;
+	flex-direction: column;
 }
 .sv_setting:last-child{
 	margin-right:0;
@@ -572,6 +579,10 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	.sv_setting_flex{
 		display:block;
 	}
+}
+
+.sv_setting.sv_setting_group_parent{
+	background-color:transparent;
 }
 
 .sv_setting.sv_setting_group {
@@ -588,9 +599,63 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	border-bottom: 1px solid rgba( 50, 50, 48, .2 );
 }
 
-.sv_setting .description {
+.sv_setting_responsive{
+	display:none;
+}
+.sv_setting_responsive_mobile{
+	display:block;
+}
+
+.sv_setting_responsive_headline_button{
+	width:35px;
+	height:35px;
+	overflow:hidden;
+	position:absolute;
+	background-color: #FFF;
+	text-align:center;
+	top: 4px;
+	right: 14px;
+	border-radius: 5px;
+	border: 1px solid rgba( 50, 50, 48, .2 );
+	z-index:1;
+}
+.sv_setting_responsive_force{
+	right:56px;
+}
+.sv_setting_responsive_select{
+	cursor:pointer;
+}
+.sv_setting_responsive_select:hover{
+	height:auto;
+	z-index:1024;
+}
+.sv_setting_responsive_headline_button > *{
+	width:15px;
+	height:15px;
+	padding:10px;
+	display:block;
+	cursor:pointer;
+}
+.sv_setting_responsive_headline_button,
+.sv_setting_responsive_select > *:hover, .sv_setting_responsive_select > .active{
+	color:#328CE6;
+}
+
+.sv_setting_description {
 	margin-bottom: 10px;
 	color: rgba( 50, 50, 48, .8 );
+	display:none;
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	right: 0px;
+	background-color: rgb(255, 255, 255);
+	padding: 10px;
+	user-select: none;
+	z-index:1000;
+}
+.sv_setting_header .fa-info-circle{
+	cursor:pointer;
 }
 
 /* Input - General */
@@ -602,6 +667,15 @@ div.log_summary table tr:first-child button#logs_filter::before {
 
 .sv_setting label.sv_input_label_color {
 	cursor: inherit;
+	position: absolute;
+	top: 50px;
+	right: 0px;
+	margin-bottom: 20px;
+	z-index: 100;
+}
+
+.sv_setting input[type="color"] {
+	width: 80px !important;
 }
 
 #wpbody .sv_setting input:not([type="checkbox"]):not([type="radio"]):not(.components-text-control__input),
@@ -633,6 +707,11 @@ div.log_summary table tr:first-child button#logs_filter::before {
 
 .sv_setting select {
 	cursor: pointer;
+}
+
+/* Select - Units */
+#wpbody .sv_setting select.sv_input_units {
+	width: 80px;
 }
 
 /* Code Editor */
@@ -856,6 +935,48 @@ input[type="submit"]#submit:hover,
 }
 
 /* Color Picker - Inputs */
+.sv_setting_header {
+	margin: 0 0 10px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba( 50, 50, 48, .2 );
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sv_setting_header > h4 {
+	margin: 0 10px 0 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+	transition: opacity .25s ease;
+}
+
+.sv_setting_header > h4:hover,
+.sv_setting_header > h4:focus {
+	opacity: .8;
+}
+
+.sv_setting_color_display {
+	min-height:100px;
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3uCTZhw1gGGYhAGBZIA/nYDCgBDAm9BGDWAAJyRCgLaBCAAgXwixzAS0pgAAAABJRU5ErkJggg==") left center;
+}
+
+.sv_setting_color_display > .sv_setting_color_value {
+	border: 1px solid rgba( 50, 50, 48, .2 );
+	border-radius: 2px;
+	width: 100%;
+	height: 100%;
+	min-height: 100px;
+}
+
+.sv_input_label_color.sv_hidden {
+	display: none;
+}
+
 .sv_setting .components-color-picker__inputs-wrapper .components-base-control__field {
 	margin: 0 2px;
 }
@@ -1416,6 +1537,13 @@ div.log_filter div.wrapper label input {
 	--sv_admin_notice_error: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.142 2l5.858 5.858v8.284l-5.858 5.858h-8.284l-5.858-5.858v-8.284l5.858-5.858h8.284zm.829-2h-9.942l-7.029 7.029v9.941l7.029 7.03h9.941l7.03-7.029v-9.942l-7.029-7.029zm-5.971 6h2v8h-2v-8zm1 12.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/></svg>');
 }
 
+.sv_dashboard_ajax_loader{
+	display: none;
+	width: 32px;
+	margin: 0 auto;
+	padding: 40px 20px;
+}
+
 .sv_dashboard_content .sv_admin_notice {
 	background-color: #23282d;
 	padding: 17px 20px 17px 16px;
@@ -1495,6 +1623,7 @@ div.log_filter div.wrapper label input {
 }
 
 .sv_setting_subpages_nav > *{
+	position: relative;
 	transition:all 0.5s;
 	display:block;
 	cursor:pointer;
@@ -1519,6 +1648,62 @@ div.log_filter div.wrapper label input {
 }
 .sv_setting_subpages_nav > .active{
 	background-color:#FFF;
+}
+
+/* Subpages - Breakpoint Nav */
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav {
+	display: none;
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	align-items: center;
+	z-index: 10;
+	justify-content: space-around;
+	margin-top: 5px;
+}
+
+@media ( min-width: 850px ) {
+	.sv_setting_subpages_nav > * > .sv_breakpoint_nav {
+		justify-content: center;
+		margin-top: 0;
+	}
+}
+
+.sv_setting_subpages_nav > *.active > .sv_breakpoint_nav {
+	display: flex;
+}
+
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > * {
+	font-size: 38px;
+	color: #b1b1b1;
+	margin: 2px 5px 0 5px;
+	padding: 5px;
+	cursor: pointer;
+	transition: color .25s ease;
+}
+
+@media ( min-width: 850px ) {
+	.sv_setting_subpages_nav > * > .sv_breakpoint_nav > * {
+		font-size: 24px;
+	}
+}
+
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > * > i.sv_rotate {
+	transform: rotate(90deg);
+}
+
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *.active,
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *:hover,
+.sv_setting_subpages_nav > * > .sv_breakpoint_nav > *:focus {
+	color: #444;
+}
+
+	/* Subpages - Breakpoint Pages */
+.sv_setting_subpage > .sv_setting_subpage_tablet_landscape,
+.sv_setting_subpage > .sv_setting_subpage_tablet,
+.sv_setting_subpage > .sv_setting_subpage_mobile_landscape,
+.sv_setting_subpage > .sv_setting_subpage_mobile {
+	display: none;
 }
 
 /* ==== straightvisions Dashboard - Modal ===================================================================== */
@@ -1598,7 +1783,12 @@ div.log_filter div.wrapper label input {
 	justify-content: flex-end;
 }
 
+.sv_dashboard_content .sv_admin_modal{
+	display:none;
+}
+
 .sv_dashboard_content .sv_admin_modal.show {
+	display:block;
 	opacity: 1;
 	margin-top: 15px;
 	z-index: 500;
