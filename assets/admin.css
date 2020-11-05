@@ -607,23 +607,23 @@ div.log_summary table tr:first-child button#logs_filter::before {
 }
 
 .sv_setting_responsive_headline_button{
-	width:35px;
+	min-width:35px;
 	height:35px;
 	overflow:hidden;
-	position:absolute;
 	background-color: #FFF;
 	text-align:center;
-	top: 4px;
-	right: 14px;
 	border-radius: 5px;
 	border: 1px solid rgba( 50, 50, 48, .2 );
-	z-index:1;
+	margin-right: 10px;
+	margin-left: auto;
+	order: 3;
 }
 .sv_setting_responsive_force{
 	right:56px;
 }
 .sv_setting_responsive_select{
 	cursor:pointer;
+	min-width:100px;
 }
 .sv_setting_responsive_select:hover{
 	height:auto;
@@ -646,9 +646,9 @@ div.log_summary table tr:first-child button#logs_filter::before {
 	color: rgba( 50, 50, 48, .8 );
 	display:none;
 	position: absolute;
-	top: 50px;
-	left: 0px;
-	right: 0px;
+	top: 0;
+	left: 0;
+	right: 0;
 	background-color: rgb(255, 255, 255);
 	padding: 10px;
 	user-select: none;
@@ -656,6 +656,10 @@ div.log_summary table tr:first-child button#logs_filter::before {
 }
 .sv_setting_header .fa-info-circle{
 	cursor:pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index:10000;
 }
 
 /* Input - General */
@@ -1699,6 +1703,8 @@ div.log_filter div.wrapper label input {
 }
 
 	/* Subpages - Breakpoint Pages */
+.sv_setting_subpage > .sv_setting_subpage_tablet_pro_landscape,
+.sv_setting_subpage > .sv_setting_subpage_tablet_pro,
 .sv_setting_subpage > .sv_setting_subpage_tablet_landscape,
 .sv_setting_subpage > .sv_setting_subpage_tablet,
 .sv_setting_subpage > .sv_setting_subpage_mobile_landscape,

@@ -147,12 +147,16 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
         id = id.replace('[mobile_landscape]','[XXX]');
         id = id.replace('[tablet]','[XXX]');
         id = id.replace('[tablet_landscape]','[XXX]');
+        id = id.replace('[tablet_pro]','[XXX]');
+        id = id.replace('[tablet_pro_landscape]','[XXX]');
         id = id.replace('[desktop]','[XXX]');
 
         container.find('.sv_input#'+id.replace('[XXX]','\\[mobile\\]')).val(value);
         container.find('.sv_input#'+id.replace('[XXX]','\\[mobile_landscape\\]')).val(value);
         container.find('.sv_input#'+id.replace('[XXX]','\\[tablet\\]')).val(value);
         container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_landscape\\]')).val(value);
+        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro\\]')).val(value);
+        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value);
         container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
 
 
@@ -450,11 +454,15 @@ function add_subpage_nav(){
                 let breakpoint_nav = '<ul class="sv_breakpoint_nav">';
                 breakpoint_nav += '<li data-id="desktop" class="active"><i class="fas fa-desktop"></i></li>';
 
+                const tablet_pro_landscape = jQuery( this ).children('.sv_setting_subpage_tablet_pro_landscape').length > 0 ? true : false;
+                const tablet_pro = jQuery( this ).children('.sv_setting_subpage_tablet_pro').length > 0 ? true : false;
                 const tablet_landscape = jQuery( this ).children('.sv_setting_subpage_tablet_landscape').length > 0 ? true : false;
                 const tablet = jQuery( this ).children('.sv_setting_subpage_tablet').length > 0 ? true : false;
                 const mobile_landscape = jQuery( this ).children('.sv_setting_subpage_mobile_landscape').length > 0 ? true : false;
                 const mobile = jQuery( this ).children('.sv_setting_subpage_mobile').length > 0 ? true : false;
 
+                breakpoint_nav += tablet_pro_landscape ? '<li data-id="tablet_pro_landscape"><i class="fas fa-tablet-alt sv_rotate"></i></li>' : '';
+                breakpoint_nav += tablet_pro ? '<li data-id="tablet_pro"><i class="fas fa-tablet-alt"></i></li>' : '';
                 breakpoint_nav += tablet_landscape ? '<li data-id="tablet_landscape"><i class="fas fa-tablet-alt sv_rotate"></i></li>' : '';
                 breakpoint_nav += tablet ? '<li data-id="tablet"><i class="fas fa-tablet-alt"></i></li>' : '';
                 breakpoint_nav += mobile_landscape ? '<li data-id="mobile_landscape"><i class="fas fa-mobile-alt sv_rotate"></i></li>' : '';
