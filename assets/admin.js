@@ -81,37 +81,6 @@ jQuery(document).on('click', '.sv_admin_mobile_toggle', function() {
     jQuery( 'body' ).toggleClass( 'sv_admin_menu_open' );
 });
 
-
-/* Input - Radio checkbox style */
-jQuery(document).on('click', '.sv_radio_switch_wrapper .switch_field input[type="radio"]:checked', function() {
-    jQuery( '.sv_radio_switch_wrapper .switch_field input[type="radio"]:not(:checked)' ).prop( 'checked', true );
-    jQuery( this ).removeProp( 'checked' );
-});
-
-/* Input - Color */
-jQuery(document).on('click', '.sv_setting_color_display', function(e) {
-    const color_picker = jQuery( this ).parent().find('.sv_input_label_color');
-
-    if ( color_picker.hasClass('sv_hidden') ) {
-        jQuery( color_picker ).slideDown();
-        color_picker.removeClass('sv_hidden');
-        const event = jQuery(document).on('click', '*', function(e) {
-            if (!color_picker.is(e.target) && color_picker.has(e.target).length === 0)
-            {
-                jQuery( color_picker ).slideUp();
-                color_picker.addClass('sv_hidden');
-                jQuery(document).unbind(e);
-
-            }
-        });
-
-    } else {
-        jQuery( color_picker ).slideUp();
-        color_picker.addClass('sv_hidden');
-    }
-
-});
-
 /* Description (Tooltip) */
 jQuery(document).on('click', '.sv_setting_header .fa-info-circle', function() {
     jQuery( this ).parent().find('.sv_setting_description').slideToggle(200);
@@ -165,58 +134,6 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
     show_notice('Setting copied to breakpoints.');
     update_option( jQuery( this ).closest( 'form' ) );
 
-});
-
-/* Module: Log */
-
-/* Select All */
-jQuery( document ).on( 'click', 'div.log_list input[type="checkbox"]#logs_select', function() {
-    jQuery( 'div.log_list input[type="checkbox"]' ).prop( 'checked', this.checked );
-});
-
-/* Select Log */
-jQuery( document ).on( 'click', '.log_list input[type="checkbox"]', function() {
-    if ( jQuery( '.log_list input[type="checkbox"]:checked:not(#logs_select)' ).length > 0) {
-        jQuery( '.log_list #logs_delete' ).css( 'visibility', 'visible' );
-        jQuery( '.log_list #logs_delete' ).css( 'opacity', '1' );
-    } else {
-        jQuery( '.log_list #logs_delete' ).css( 'visibility', 'hidden' );
-        jQuery( '.log_list #logs_delete' ).css ('opacity', '0' );
-    }
-});
-
-/* Click Log */
-jQuery( document ).on( 'click', 'div.log_list tr.log', function() {
-    var log_id		= jQuery( this ).attr( 'ID' )
-    var table 		= jQuery( 'div.log_details table#log_' + log_id );
-
-    jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
-    jQuery( 'div.sv_log' ).removeClass( 'show_filter' );
-
-    if( jQuery( 'div.sv_log' ).hasClass( 'show_details' ) ) {
-        var table_id	= jQuery( 'div.log_details table.show' ).attr( 'ID' );
-
-        if( 'log_' + log_id != table_id ) {
-            jQuery( this ).addClass( 'active' );
-            jQuery( 'div.log_details table.show' ).toggleClass( 'show' );
-            table.toggleClass( 'show' );
-        } else {
-            table.toggleClass( 'show' );
-            jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
-        }
-    } else {
-        jQuery( this ).addClass( 'active' );
-        jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
-        table.toggleClass( 'show' );
-    }
-});
-
-/* Click Filter */
-jQuery( document ).on( 'click', 'div.log_summary button#logs_filter', function() {
-    jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
-    jQuery( 'div.sv_log' ).removeClass( 'show_details' );
-    jQuery( 'div.log_details table' ).removeClass( 'show' );
-    jQuery( 'div.sv_log' ).toggleClass( 'show_filter' );
 });
 
 /* set form referer for redirect to current subpage on submit */

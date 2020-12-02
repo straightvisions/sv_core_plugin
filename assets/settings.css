@@ -1,0 +1,235 @@
+/* Form Table */
+.sv_dashboard_content table.form-table tbody {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.sv_dashboard_content table.form-table tr {
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+.sv_dashboard_content table.form-table th {
+	padding:0;
+	width:auto;
+}
+
+.sv_dashboard_content table.form-table td {
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+/* Setting Info */
+.sv_setting {
+	background-color: rgba( 50, 50, 48, .05 );
+	padding: 15px;
+	border-radius: 5px;
+	width:100%;
+	margin-bottom:12px;
+	margin-right:12px;
+	box-sizing:border-box;
+	position:relative;
+	display: flex;
+	flex-direction: column;
+}
+.sv_setting:last-child{
+	margin-right:0;
+}
+.sv_setting_flex{
+	display:flex;
+}
+@media screen and (max-width: 782px){
+	.sv_setting_flex{
+		display:block;
+	}
+}
+
+.sv_setting.sv_setting_group_parent{
+	background-color:transparent;
+}
+
+.sv_setting.sv_setting_group {
+	margin-top: 25px;
+}
+
+.sv_setting_group_input {
+	margin-top: 25px;
+}
+
+.sv_setting h4 {
+	margin: 0 0 10px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba( 50, 50, 48, .2 );
+}
+
+.sv_setting_header {
+	margin: 0 0 10px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba( 50, 50, 48, .2 );
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sv_setting_header > h4 {
+	margin: 0 10px 0 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+	transition: opacity .25s ease;
+}
+
+.sv_setting_header > h4:hover,
+.sv_setting_header > h4:focus {
+	opacity: .8;
+}
+
+.sv_setting_responsive{
+	display:none;
+}
+.sv_setting_responsive_mobile{
+	display:block;
+}
+
+.sv_setting_responsive_headline_button{
+	min-width:35px;
+	height:35px;
+	overflow:hidden;
+	background-color: #FFF;
+	text-align:center;
+	border-radius: 5px;
+	border: 1px solid rgba( 50, 50, 48, .2 );
+	margin-right: 10px;
+	margin-left: auto;
+	order: 3;
+}
+.sv_setting_responsive_force{
+	right:56px;
+}
+.sv_setting_responsive_select{
+	cursor:pointer;
+	min-width:100px;
+}
+.sv_setting_responsive_select:hover{
+	height:auto;
+	z-index:1024;
+}
+.sv_setting_responsive_headline_button > *{
+	width:15px;
+	height:15px;
+	padding:10px;
+	display:block;
+	cursor:pointer;
+}
+.sv_setting_responsive_headline_button,
+.sv_setting_responsive_select > *:hover, .sv_setting_responsive_select > .active{
+	color:#328CE6;
+}
+
+.sv_setting_description {
+	margin-bottom: 10px;
+	color: rgba( 50, 50, 48, .8 );
+	display:none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: rgb(255, 255, 255);
+	padding: 10px;
+	user-select: none;
+	z-index:1000;
+}
+.sv_setting_header .fa-info-circle{
+	cursor:pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index:10000;
+}
+
+/* Input - General */
+.sv_setting label:not(.sv_input_label_color) {
+	display: flex;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.sv_setting label.sv_input_label_color {
+	cursor: inherit;
+	position: absolute;
+	top: 50px;
+	right: 0px;
+	margin-bottom: 20px;
+	z-index: 100;
+}
+
+.sv_setting input[type="color"] {
+	width: 80px !important;
+}
+
+/* Select - Units */
+#wpbody .sv_setting select.sv_input_units {
+	width: 80px;
+}
+
+/* Input - Buttons */
+.sv_dashboard_button,
+input[type="submit"]#submit,
+.sv_setting button:not(.components-color-picker__saturation-pointer):not(.components-button),
+.sv_setting .button,
+.sv_setting input[type="button"],
+.sv_setting input[type="submit"] {
+	text-shadow: none;
+	color: rgba( 50, 50, 48, 1 );
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	border: 1px solid rgba( 50, 50, 48, .2 );
+	box-shadow: none;
+	transition: .25s ease;
+	height: 40px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 15px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.sv_dashboard_button:hover,
+input[type="submit"]#submit:hover,
+.sv_setting button:not(.components-color-picker__saturation-pointer):not(.components-button):hover,
+.sv_setting .button:hover,
+.sv_setting input[type="button"]:hover,
+.sv_setting input[type="submit"]:hover {
+	background-color: rgba( 50, 50, 48, 1 );
+	border-color: rgba( 50, 50, 48, 1 );
+	color: #FFFFFF;
+}
+
+.sv_setting button.components-button {
+	color: rgba( 50, 50, 48, .75 );
+	transition: color .25s ease;
+	height: 36px;
+	width: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sv_setting button.components-button:hover,
+.sv_setting button.components-button:focus {
+	color: rgba( 50, 50, 48, 1 );
+	background: none !important;
+	border: 0 !important;
+	box-shadow: none !important;
+}
+
+/* WooCommerce */
+div.sv100_sv_woocommerce_settings_setting_group_item {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	margin-bottom: 10px;
+}

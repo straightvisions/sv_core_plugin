@@ -83,7 +83,6 @@ jQuery(document).ready(function($) {
                     return;
                 }
 
-
                 // call
                 return self.call = jQuery.ajax({
                     url: SVCA.params.ajax_url,
@@ -113,15 +112,7 @@ jQuery(document).ready(function($) {
                     },
                 });
             }
-
-
         };
-
         SVCA.sections.init({container:'.sv_dashboard_content'});
-
     }
-
-
-
-
 });
