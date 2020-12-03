@@ -33,7 +33,6 @@ jQuery(document).ready(function($) {
                     }else{
                         self.get(section);
                     }
-
                 }
 
                 console.log('SVCA-SECTIONS init - done');
@@ -99,6 +98,7 @@ jQuery(document).ready(function($) {
                             self.params.container.prepend( html );
                             section = '#section_' + section;
                             if(jQuery(section).length > 0){
+                                jQuery('.sv_admin_menu_item[data-sv_admin_menu_target="' + section + '"]').addClass('active');
                                 jQuery(section).addClass('active ajax-loaded').fadeIn();
                             }
 

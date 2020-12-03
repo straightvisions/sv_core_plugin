@@ -14,9 +14,6 @@ body.sv_admin_menu_open {
 /* ==== straightvisions Dashboard - Menu ============================================================================ */
 div.sv_admin_menu {
 	width: 100%;
-	position: -webkit-sticky; /* Safari */
-	position: sticky;
-	top: 0;
 	background-color: #FFF;
 	z-index: 100;
 }
@@ -26,6 +23,9 @@ div.sv_admin_menu_head {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	top: 0;
 }
 
 div.sv_admin_menu a.sv_admin_brand,
@@ -85,9 +85,11 @@ div#sv_admin_menu_body {
 }
 
 div.sv_admin_menu .sv_admin_menu_item {
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: flex-start;
 	cursor: pointer;
 	border-bottom: 1px solid rgba( 50, 50, 48, .2 );
+	transition: color .25s ease, background-color .25s ease;
 }
 
 div.sv_admin_menu .sv_admin_menu_item:last-child {
@@ -95,20 +97,43 @@ div.sv_admin_menu .sv_admin_menu_item:last-child {
 }
 
 div.sv_admin_menu .sv_admin_menu_item:hover,
-div.sv_admin_menu .sv_admin_menu_item:focus,
-div.sv_admin_menu .sv_admin_menu_item.active {
-	color: rgba( 50, 50, 48, 1 );
+div.sv_admin_menu .sv_admin_menu_item:focus {
 	border-left-color: rgba( 50, 50, 48, 1 );
 	outline: none;
 }
 
-div.sv_admin_menu .sv_admin_menu_item h4 {
-	margin: 0 0 3px 0;
+div.sv_admin_menu .sv_admin_menu_item.active {
+	color: #ffffff;
+	background-color: rgba( 50, 50, 48, 1 );
 }
 
-div.sv_admin_menu .sv_admin_menu_item h4,
-div.sv_admin_menu .sv_admin_menu_item span {
-	max-width: calc( 100% - 40px );
+div.sv_admin_menu .sv_admin_menu_item > i {
+	display: flex;
+	flex: 0 0 32px;
+	align-items: center;
+	margin-right: 10px;
+}
+
+div.sv_admin_menu .sv_admin_menu_item .section_icon > svg {
+	height: 32px;
+	width: 32px;
+	fill: #2b2d30;
+	transition: fill .25s ease;
+}
+
+div.sv_admin_menu .sv_admin_menu_item.active .section_icon > svg {
+	fill: #ffffff;
+}
+
+div.sv_admin_menu .sv_admin_menu_item .section_title {
+	flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.sv_admin_menu .sv_admin_menu_item .section_title h4 {
+	margin: 0 0 3px 0;
 }
 
 /* ===/ straightvisions Dashboard - Menu ============================================================================ */
@@ -312,6 +337,7 @@ section.sv_admin_section div.section_content code {
 /* ===/ straightvisions Dashboard - Layout Elements ================================================================= */
 
 /* ==== straightvisions Dashboard - Icons ============================================================================ */
+/*
 div.sv_admin_menu .sv_admin_menu_item::before,
 section.sv_admin_section .section_head::before,
 section.sv_admin_section div.section_content ul.instance_list a div::before,
@@ -473,6 +499,7 @@ i.fa-box-open {
 div.log_summary table tr:first-child button#logs_filter::before {
 	content: '\f0b0';
 }
+*/
 /* ===/ straightvisions Dashboard - Icons =========================================================================== */
 /* ==== straightvisions Dashboard - Breakpoints ===================================================================== */
 @media (min-width: 400px) {
@@ -488,14 +515,14 @@ div.log_summary table tr:first-child button#logs_filter::before {
 
 @media (min-width: 600px) {
 	section.sv_admin_section .section_head,
-	div.sv_admin_menu {
+	div.sv_admin_menu_head {
 		top: 46px;
 	}
 }
 
 @media (min-width: 783px) {
 	section.sv_admin_section .section_head,
-	div.sv_admin_menu {
+	div.sv_admin_menu_head {
 		top: 32px;
 	}
 }

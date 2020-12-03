@@ -72,7 +72,9 @@ jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]',
         if(jQuery(document).width() < 800) {
             jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
         }
+        jQuery('.sv_admin_menu_item').removeClass('active');
         SVCA.sections.get( jQuery(this).data('sv_admin_menu_target') );
+        jQuery(this).addClass('active');
     }
 });
 
