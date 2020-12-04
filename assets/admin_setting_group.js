@@ -57,6 +57,6 @@ jQuery( 'body' ).on( 'click', '.sv_setting_group_delete', function() {
 });
 
 jQuery( 'body' ).on('click', '.sv_setting_group_title', function() {
-	jQuery( this ).find( '.fa-angle-right' ).toggleClass( 'open' );
+	jQuery( this ).parents( '.sv_setting_group' ).toggleClass( 'open' );
 	jQuery( this ).parents( '.sv_setting_group' ).find( '.sv_setting_group_settings_wrapper' ).slideToggle( 400 );
 });

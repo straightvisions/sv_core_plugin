@@ -84,7 +84,7 @@ jQuery(document).on('click', '.sv_admin_mobile_toggle', function() {
 });
 
 /* Description (Tooltip) */
-jQuery(document).on('click', '.sv_setting_header .fa-info-circle', function() {
+jQuery(document).on('click', '.sv_setting_header .sv_setting_description_icon', function() {
     jQuery( this ).parent().find('.sv_setting_description').slideToggle(200);
 });
 
