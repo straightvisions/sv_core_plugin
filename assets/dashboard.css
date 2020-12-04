@@ -198,6 +198,25 @@ section.sv_admin_section div.section_content {
 	font-size: 14px;
 }
 
+/* Info Section */
+.sv_dashboard_content .instance_list > .instance i,
+.sv_dashboard_content .instance_list > .instance i > svg {
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	margin-right: 5px;
+}
+
+.sv_dashboard_content .instance_list .instance_title,
+.sv_dashboard_content .instance_list .instance_type,
+.sv_dashboard_content .instance_list .instance_version,
+.sv_dashboard_content .instance_list .instance_version_core,
+.sv_dashboard_content .instance_list .instance_version_core_match,
+.sv_dashboard_content .instance_list .instance_status {
+	display: flex;
+	align-items: center;
+}
+
 /* ===/ straightvisions Dashboard - Content ========================================================================= */
 
 /* ==== straightvisions Dashboard - Layout Elements ================================================================= */
@@ -227,16 +246,16 @@ section.sv_admin_section div.section_content ul.info_list li span {
 
 section.sv_admin_section div.section_content ul.instance_list a {
 	padding: 10px 15px;
-	border-radius: 3px;
+	border-radius: 5px;
 	box-sizing: border-box;
 	outline: none;
 	box-shadow: none;
 	color: rgba(43, 45, 48, .8);
-	border: 2px solid rgba(43, 45, 48, .3);
+	border: 1px solid rgba(43, 45, 48, .3);
 	text-decoration: none;
 	transition: .3s ease;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-template-rows: auto 1fr auto auto;
 	grid-template-areas:
 			'instance_title instance_title instance_title'

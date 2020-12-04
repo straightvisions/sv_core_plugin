@@ -117,7 +117,7 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
         id = id.replace('[mobile]','[XXX]');
         id = id.replace('[mobile_landscape]','[XXX]');
         id = id.replace('[tablet]','[XXX]');
-        id = id.replace('[tablet_landscape]','[XXX]');
+        id = id.replace('[tablet_landscape]','[XXX]'); 
         id = id.replace('[tablet_pro]','[XXX]');
         id = id.replace('[tablet_pro_landscape]','[XXX]');
         id = id.replace('[desktop]','[XXX]');
@@ -149,36 +149,8 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
 
     add_subpage_nav();
 
-    jQuery( '.sv_dashboard_content input[type="checkbox"], .sv_dashboard_content input[type="radio"]' ).unbind().on( 'click', function() {
+    jQuery( '.sv_dashboard_content input, .sv_dashboard_content textarea, .sv_dashboard_content select' ).unbind().on( 'change', function() {
         update_option( jQuery( this ).parents( 'form' ) );
-    });
-
-    jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).unbind().on( 'focusin', function() {
-        if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
-            jQuery( this ).data( 'val', jQuery( this ).val() );
-        }
-    });
-
-
-    jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).unbind().on( 'change', function() {
-        if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
-            var prev 	= jQuery( this ).data( 'val' );
-            var current = jQuery( this ).val();
-
-            if ( current !== prev ) {
-                update_option( jQuery( this ).parents( 'form' ) );
-            }
-        }
-    });
-
-
-    jQuery( '.sv_dashboard_content textarea' ).unbind().on( 'change', function() {
-        var prev 	= jQuery( this ).data( 'text' );
-        var current = jQuery( this ).val();
-
-        if ( current !== prev ) {
-            update_option( jQuery( this ).parents( 'form' ) );
-        }
     });
 
     jQuery('#sv_core_expert_mode .sv_setting_checkbox input').unbind().on('change', function(){
@@ -222,7 +194,6 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
 
 
     jQuery( 'button[data-sv_admin_modal], input[data-sv_admin_modal]' ).unbind().on( 'click', function() {
-    	console.log('click');
         let title 	= jQuery( this ).data( 'sv_admin_modal' )[0].title;
         let desc 	= jQuery( this ).data( 'sv_admin_modal' )[0].desc;
         let type	= jQuery( this ).data( 'sv_admin_modal' )[0].type;
