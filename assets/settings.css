@@ -22,6 +22,15 @@
 }
 
 /* Setting Info */
+.sv_setting_flex{
+	display:flex;
+	flex-wrap:wrap;
+}
+@media screen and (max-width: 782px){
+	.sv_setting_flex{
+		display:block;
+	}
+}
 .sv_setting {
 	background-color: rgba( 50, 50, 48, .05 );
 	padding: 15px;
@@ -33,19 +42,14 @@
 	position:relative;
 	display: flex;
 	flex-direction: column;
+	flex-basis: calc(50% - 12px);
+	flex-grow: 1;
 }
-.sv_setting:last-child{
+.sv_setting:first-child:last-child,
+.sv_setting:nth-child(even){
+	flex-basis: 50%;
 	margin-right:0;
 }
-.sv_setting_flex{
-	display:flex;
-}
-@media screen and (max-width: 782px){
-	.sv_setting_flex{
-		display:block;
-	}
-}
-
 .sv_setting.sv_setting_group_parent{
 	background-color:transparent;
 }
