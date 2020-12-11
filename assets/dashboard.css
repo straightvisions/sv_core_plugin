@@ -713,7 +713,7 @@ section.sv_admin_section div.section_content code {
 	display:block;
 	opacity: 1;
 	margin-top: 15px;
-	z-index: 500;
+	z-index: 500000;
 	visibility: visible;
 }
 #update-nag, .update-nag {
