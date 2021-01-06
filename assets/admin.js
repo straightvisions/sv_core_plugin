@@ -72,7 +72,9 @@ jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]',
         if(jQuery(document).width() < 800) {
             jQuery(jQuery('.sv_admin_mobile_toggle').attr('data-sv_admin_menu_target')).toggle();
         }
+        jQuery('.sv_admin_menu_item').removeClass('active');
         SVCA.sections.get( jQuery(this).data('sv_admin_menu_target') );
+        jQuery(this).addClass('active');
     }
 });
 
@@ -81,39 +83,8 @@ jQuery(document).on('click', '.sv_admin_mobile_toggle', function() {
     jQuery( 'body' ).toggleClass( 'sv_admin_menu_open' );
 });
 
-
-/* Input - Radio checkbox style */
-jQuery(document).on('click', '.sv_radio_switch_wrapper .switch_field input[type="radio"]:checked', function() {
-    jQuery( '.sv_radio_switch_wrapper .switch_field input[type="radio"]:not(:checked)' ).prop( 'checked', true );
-    jQuery( this ).removeProp( 'checked' );
-});
-
-/* Input - Color */
-jQuery(document).on('click', '.sv_setting_color_display', function(e) {
-    const color_picker = jQuery( this ).parent().find('.sv_input_label_color');
-
-    if ( color_picker.hasClass('sv_hidden') ) {
-        jQuery( color_picker ).slideDown();
-        color_picker.removeClass('sv_hidden');
-        const event = jQuery(document).on('click', '*', function(e) {
-            if (!color_picker.is(e.target) && color_picker.has(e.target).length === 0)
-            {
-                jQuery( color_picker ).slideUp();
-                color_picker.addClass('sv_hidden');
-                jQuery(document).unbind(e);
-
-            }
-        });
-
-    } else {
-        jQuery( color_picker ).slideUp();
-        color_picker.addClass('sv_hidden');
-    }
-
-});
-
 /* Description (Tooltip) */
-jQuery(document).on('click', '.sv_setting_header .fa-info-circle', function() {
+jQuery(document).on('click', '.sv_setting_header .sv_setting_description_icon', function() {
     jQuery( this ).parent().find('.sv_setting_description').slideToggle(200);
 });
 
@@ -146,7 +117,7 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
         id = id.replace('[mobile]','[XXX]');
         id = id.replace('[mobile_landscape]','[XXX]');
         id = id.replace('[tablet]','[XXX]');
-        id = id.replace('[tablet_landscape]','[XXX]');
+        id = id.replace('[tablet_landscape]','[XXX]'); 
         id = id.replace('[tablet_pro]','[XXX]');
         id = id.replace('[tablet_pro_landscape]','[XXX]');
         id = id.replace('[desktop]','[XXX]');
@@ -167,58 +138,6 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
 
 });
 
-/* Module: Log */
-
-/* Select All */
-jQuery( document ).on( 'click', 'div.log_list input[type="checkbox"]#logs_select', function() {
-    jQuery( 'div.log_list input[type="checkbox"]' ).prop( 'checked', this.checked );
-});
-
-/* Select Log */
-jQuery( document ).on( 'click', '.log_list input[type="checkbox"]', function() {
-    if ( jQuery( '.log_list input[type="checkbox"]:checked:not(#logs_select)' ).length > 0) {
-        jQuery( '.log_list #logs_delete' ).css( 'visibility', 'visible' );
-        jQuery( '.log_list #logs_delete' ).css( 'opacity', '1' );
-    } else {
-        jQuery( '.log_list #logs_delete' ).css( 'visibility', 'hidden' );
-        jQuery( '.log_list #logs_delete' ).css ('opacity', '0' );
-    }
-});
-
-/* Click Log */
-jQuery( document ).on( 'click', 'div.log_list tr.log', function() {
-    var log_id		= jQuery( this ).attr( 'ID' )
-    var table 		= jQuery( 'div.log_details table#log_' + log_id );
-
-    jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
-    jQuery( 'div.sv_log' ).removeClass( 'show_filter' );
-
-    if( jQuery( 'div.sv_log' ).hasClass( 'show_details' ) ) {
-        var table_id	= jQuery( 'div.log_details table.show' ).attr( 'ID' );
-
-        if( 'log_' + log_id != table_id ) {
-            jQuery( this ).addClass( 'active' );
-            jQuery( 'div.log_details table.show' ).toggleClass( 'show' );
-            table.toggleClass( 'show' );
-        } else {
-            table.toggleClass( 'show' );
-            jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
-        }
-    } else {
-        jQuery( this ).addClass( 'active' );
-        jQuery( 'div.sv_log' ).toggleClass( 'show_details' );
-        table.toggleClass( 'show' );
-    }
-});
-
-/* Click Filter */
-jQuery( document ).on( 'click', 'div.log_summary button#logs_filter', function() {
-    jQuery( 'div.log_list tr.log' ).removeClass( 'active' );
-    jQuery( 'div.sv_log' ).removeClass( 'show_details' );
-    jQuery( 'div.log_details table' ).removeClass( 'show' );
-    jQuery( 'div.sv_log' ).toggleClass( 'show_filter' );
-});
-
 /* set form referer for redirect to current subpage on submit */
 jQuery( document ).on('submit', 'section.sv_admin_section form', function(e){
     jQuery(this).find('input[name="_wp_http_referer"]').val(jQuery(location).attr('href'));
@@ -230,36 +149,8 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
 
     add_subpage_nav();
 
-    jQuery( '.sv_dashboard_content input[type="checkbox"], .sv_dashboard_content input[type="radio"]' ).unbind().on( 'click', function() {
+    jQuery( '.sv_dashboard_content input, .sv_dashboard_content textarea, .sv_dashboard_content select' ).unbind().on( 'change', function() {
         update_option( jQuery( this ).parents( 'form' ) );
-    });
-
-    jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).unbind().on( 'focusin', function() {
-        if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
-            jQuery( this ).data( 'val', jQuery( this ).val() );
-        }
-    });
-
-
-    jQuery( '.sv_dashboard_content input, .sv_dashboard_content select' ).unbind().on( 'change', function() {
-        if ( ! jQuery( this ).is( 'input[type="radio"]' ) ) {
-            var prev 	= jQuery( this ).data( 'val' );
-            var current = jQuery( this ).val();
-
-            if ( current !== prev ) {
-                update_option( jQuery( this ).parents( 'form' ) );
-            }
-        }
-    });
-
-
-    jQuery( '.sv_dashboard_content textarea' ).unbind().on( 'change', function() {
-        var prev 	= jQuery( this ).data( 'text' );
-        var current = jQuery( this ).val();
-
-        if ( current !== prev ) {
-            update_option( jQuery( this ).parents( 'form' ) );
-        }
     });
 
     jQuery('#sv_core_expert_mode .sv_setting_checkbox input').unbind().on('change', function(){
@@ -303,7 +194,6 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
 
 
     jQuery( 'button[data-sv_admin_modal], input[data-sv_admin_modal]' ).unbind().on( 'click', function() {
-    	console.log('click');
         let title 	= jQuery( this ).data( 'sv_admin_modal' )[0].title;
         let desc 	= jQuery( this ).data( 'sv_admin_modal' )[0].desc;
         let type	= jQuery( this ).data( 'sv_admin_modal' )[0].type;
