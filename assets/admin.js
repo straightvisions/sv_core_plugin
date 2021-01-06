@@ -103,6 +103,7 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
     const container = jQuery(this).closest('.sv_setting');
     const settings_source = container.children('.active').first();
     const settings_source_inputs = settings_source.find('.sv_input');
+    const is_color_setting = container.hasClass('sv_setting_color_parent');
 
     settings_source_inputs.each(function(){
         const el    = jQuery(this);
@@ -130,7 +131,16 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
         container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value);
         container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
 
-
+        // Settings type: color
+        if ( is_color_setting ) {
+            container.find('.sv_setting_responsive.sv_setting_responsive_mobile .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+            container.find('.sv_setting_responsive.sv_setting_responsive_mobile_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+            container.find('.sv_setting_responsive.sv_setting_responsive_tablet .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+            container.find('.sv_setting_responsive.sv_setting_responsive_desktop .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+        }
     });
 
     show_notice('Setting copied to breakpoints.');
