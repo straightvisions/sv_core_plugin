@@ -260,8 +260,97 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
         }
     } );
 
+
+   /* AJAX SAVE FORM ------------------------------- */
+    let settings_form_list = jQuery('.sv_admin_section.active .sv100_settings_ajax_save_form');
+
+    if( settings_form_list.length > 0 ){
+        settings_form_list.each(function(){
+           const form = jQuery(this);
+
+           form.find('.save-classic').on('click',function(){
+              form.submit();
+           });
+
+           form.find('.save-ajax').on('click',function(e){
+               e.preventDefault();
+
+              //form.ajaxSubmit();
+              /* get auth data */
+               let options = [
+                   {
+                       name: 'option_page',
+                       value: form.find('input[name="option_page"]').val(),
+                   },
+                   {
+                       name: 'action',
+                       //value: form.find('input[name="action"]').val(),
+                       value: 'sv_ajax_settings_save_form'
+                   },
+                   {
+                       name: '_wpnonce',
+                       value: form.find('input[name="_wpnonce"]').val(),
+                   },
+
+
+               ];
+
+              const perChunk = 1500; // CHANGE THIS TO TOGGLE CHUNK SIZE
+              const data = form.serializeArray();
+              const chunks = data.reduce((all,one,i) => {
+                   const ch = Math.floor(i/perChunk);
+                   all[ch] = [].concat((all[ch]||[]),one);
+                   return all;
+              }, []);
+
+               const len = chunks.length;
+               jQuery(this).val(chunks.length);
+               chunkCrunch(chunks.splice(0, Math.ceil(len / 4)), options, perChunk, jQuery(this));
+               chunkCrunch(chunks.splice(0, Math.ceil(len / 4)), options, perChunk, jQuery(this));
+               chunkCrunch(chunks.splice(0, Math.ceil(len / 4)), options, perChunk, jQuery(this));
+               chunkCrunch(chunks.splice(0, Math.ceil(len / 4)), options, perChunk, jQuery(this));
+
+           });
+
+        });
+    }
+
 } // ----------------------------------------------
 
+function chunkCrunch(chunks, options, perChunk, btn){
+        if(chunks.length <= 0) return;
+
+        promisedAjax({
+            method: 'POST',
+            url: SVCA.params.ajax_url + '?action=' + options[1].value,
+            data: {
+                page: SVCA.get_url_param('page'),
+                nonce: SVCA.get_plugin_localized_nonce(),
+                // fields:           jQuery.param(chunks[i]), // url param variant
+                fields: chunks.splice(0, 1),
+            }
+
+        }).then(function(){
+            btn.val(btn.val() - 1);
+            chunkCrunch(chunks, options, perChunk, btn);
+        });
+
+}
+
+function promisedAjax(params, i) {
+    return new Promise(function(resolve, reject) {
+        jQuery.ajax(
+            Object.assign(params, {
+                success: function (data) {
+                    resolve(true) // Resolve promise and go to then()
+                },
+                error: function (err) {
+                    reject(false) // Reject the promise and go to catch()
+                }
+            })
+        );
+    });
+}
 
 // very important ;)
 jQuery(document).ready(function(){
