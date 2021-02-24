@@ -295,7 +295,7 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
 
                ];
 
-              const perChunk = 1500; // CHANGE THIS TO TOGGLE CHUNK SIZE
+              const perChunk = 100; // CHANGE THIS TO TOGGLE CHUNK SIZE
               const data = form.serializeArray();
               const chunks = data.reduce((all,one,i) => {
                    const ch = Math.floor(i/perChunk);
@@ -387,12 +387,13 @@ function show_notice( msg, type = 'info' ) {
  * When update_option is called, it starts a timeout with the duration define in the timeout var,
  * if the save_option function is called in this time window, the timeout will reset and start again.
  */
+/*
 var timeout			= 1000;
 var forms			= {};
 var timeout_handle	= setTimeout( save_settings , timeout );
-
+*/
 function update_option( form ) {
-	if ( ! jQuery( form ).find( 'input[type="file"]' ).length > 0
+	/*if ( ! jQuery( form ).find( 'input[type="file"]' ).length > 0
 		&& (
 			jQuery( form ).data( 'ajax' ) === undefined
 			|| jQuery( form ).data( 'ajax' ) === '1'
@@ -402,11 +403,11 @@ function update_option( form ) {
 
 		window.clearTimeout( timeout_handle );
 		timeout_handle = setTimeout( save_settings, timeout );
-	}
+	}*/
 }
 
 function save_settings() {
-	for ( const [ id, form ] of Object.entries( forms ) ) {
+	/*for ( const [ id, form ] of Object.entries( forms ) ) {
 		jQuery( form ).ajaxSubmit({
 			success: function () {
 				show_notice( sv_core_admin.settings_saved, 'success' );
@@ -414,7 +415,7 @@ function save_settings() {
 		});
 	}
 
-	forms 	= [];
+	forms 	= [];*/
 }
 
 /*

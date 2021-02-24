@@ -720,3 +720,10 @@ section.sv_admin_section div.section_content code {
 	margin-left: 160px;
     width: calc(100% - 200px);
 }
+
+.sv100_settings_ajax_save_form p.submit{
+	position: fixed;
+	bottom: 0;
+	left: 180px;
+	z-index: 100;
+}
