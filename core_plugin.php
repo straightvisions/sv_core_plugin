@@ -64,6 +64,51 @@
 					}
 				);
 			}
+		}
 
+		public function get_module( string $name, bool $required = false ) {
+			if($this->is_module_loaded($name)){
+				return $this->get_modules_loaded()[$this->get_root()->get_prefix($name)];
+			}
+
+			$loaded = $this->get_root()
+				->load_module(
+					$name,
+					$this->get_root()->get_path( 'lib/modules/'.$name ),
+					$this->get_root()->get_url( 'lib/modules/'.$name ),
+					$required
+				);
+
+			if($loaded){
+				return $this->get_root()->get_modules_loaded()[$this->get_root()->get_prefix($name) ];
+			}
+
+			return false;
+		}
+
+		public function load_module( string $name, string $path = 'lib/modules/', string $url = 'lib/modules/', bool $required = false ): bool {
+			if($this->is_module_loaded($name)){ // already loaded
+				return true;
+			}
+
+			$full_path			= $this->get_root()->get_path($path) . $name . '/';
+			$full_init_path		= $full_path . $name . '.php';
+			$full_url			= $this->get_root()->get_url($url) . $name . '/';
+
+			require_once( $full_init_path );
+
+			$class_name  = $this->get_root()->get_name() . '\\' . $name;
+			$this->get_root()->$name = new $class_name();
+			$this->get_root()->$name
+				->set_name( $this->get_root()->get_prefix( $this->get_root()->$name->get_module_name() ) )
+				->set_path( $full_path )
+				->set_url( $full_url )
+				->set_root( $this->get_root() )
+				->set_parent( $this )
+				->init();
+
+			$this->set_modules_loaded($this->get_root()->$name->get_prefix(), $this->get_root()->$name);
+
+			return true;
 		}
 	}
