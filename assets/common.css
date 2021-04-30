@@ -54,7 +54,10 @@
 	padding: 0 20px !important;
 }
 /* ===/ WordPress =================================================================================================== */
-.wp-core-ui .notice.is-dismissible{
-	padding: 20px;
-	margin-left: 180px;
+.notice{
+	padding: 12px;
+	max-width: 1000px;
+	margin: 20px auto 20px auto;
+	position: relative;
+	left: 160px;
 }
