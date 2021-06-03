@@ -66,7 +66,7 @@ div.sv_admin_menu div.sv_admin_mobile_toggle {
 }
 
 div#sv_admin_menu_body {
-	display: none;
+	display: block;
 	transition: none;
 	max-height: calc( 100vh - ( 80px + 46px ) );
 	overflow-y: auto;
