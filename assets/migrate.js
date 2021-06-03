@@ -67,7 +67,7 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
         }
     });
 
-    show_notice('Setting copied to breakpoints.');
+    SVCA.show_notice('Setting copied to breakpoints.');
     update_option( jQuery( this ).closest( 'form' ) );
 
 });
@@ -97,9 +97,9 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
                 response = JSON.parse(response);
 
                 if(response.status === 'success') {
-                    show_notice( response.message, 'success' );
+                    SVCA.show_notice( response.message, 'success' );
                 } else {
-                    show_notice( response.message, 'error' );
+                    SVCA.show_notice( response.message, 'error' );
                 }
             });
     });
@@ -283,28 +283,7 @@ jQuery(document).ready(function(){
 
 
 /* ===== Ajax Save Settings ===== */
-function show_notice( msg, type = 'info' ) {
-    var types 	= [ 'info', 'success', 'warning', 'error' ];
 
-    if ( jQuery.inArray( type, types ) >= 0 ) {
-        var el = jQuery( '.sv_admin_notice' );
-        type = 'notice-' + type;
-
-        // Removes old message and replaces it with the new one
-        el.html( msg );
-
-        if ( ! el.hasClass( type ) ) {
-            el.attr( 'class', 'sv_admin_notice' );
-            el.toggleClass( type );
-        }
-
-        el.toggleClass( 'show' );
-
-        setTimeout( function () {
-            el.toggleClass( 'show' );
-        }, 3000 );
-    }
-}
 
 /**
  * This part prevents spamming of the ajax request.
@@ -334,7 +313,7 @@ function save_settings() {
     /*for ( const [ id, form ] of Object.entries( forms ) ) {
         jQuery( form ).ajaxSubmit({
             success: function () {
-                show_notice( sv_core_admin.settings_saved, 'success' );
+                SVCA.show_notice( sv_core_admin.settings_saved, 'success' );
             },
         });
     }
@@ -445,7 +424,7 @@ function sv_admin_ajax_call( data, modal = false ) {
         let data = JSON.parse( response );
 
         if ( data.notice ) {
-            show_notice( data.msg, data.type )
+            SVCA.show_notice( data.msg, data.type )
         } else {
             console.log( response );
         }

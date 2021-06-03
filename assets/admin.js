@@ -62,6 +62,29 @@ if( typeof SVCA == 'undefined' ){
             return output;
         };
 
+        this.show_notice = function( msg, type = 'info' ){
+            var types 	= [ 'info', 'success', 'warning', 'error' ];
+
+            if ( jQuery.inArray( type, types ) >= 0 ) {
+                var el = jQuery( '.sv_admin_notice' );
+                type = 'notice-' + type;
+
+                // Removes old message and replaces it with the new one
+                el.html( msg );
+
+                if ( ! el.hasClass( type ) ) {
+                    el.attr( 'class', 'sv_admin_notice' );
+                    el.toggleClass( type );
+                }
+
+                el.toggleClass( 'show' );
+
+                setTimeout( function () {
+                    el.toggleClass( 'show' );
+                }, 3000 );
+            }
+        };
+
         this.init();
     };
 }
