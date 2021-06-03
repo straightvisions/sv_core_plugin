@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
                 self._bind();
 
                 jQuery(window).on('SVCA_UPDATE',function(){
-                   self._bind();
+                   SVCA.clipboard._bind();
                 });
 
                 console.log('SVCA-CLIPBOARD init - done');

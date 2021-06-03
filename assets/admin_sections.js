@@ -40,18 +40,18 @@ jQuery(document).ready(function($) {
 
             self.get_call = function(){
                 return self.call;
-            }
+            };
 
             self.stop_call = function(){
                 SVCA.loader(false);
                 self.call.abort();
-            }
+            };
 
             self.close_call = function(){
                 SVCA.loader(false);
-                bind_events(); // remove after admin.js refactoring
+                SVCA.update(); // remove after admin.js refactoring
                 return self.call = null;
-            }
+            };
 
             self.get = function(section){
                 if(typeof section == 'undefined' || section == null){
