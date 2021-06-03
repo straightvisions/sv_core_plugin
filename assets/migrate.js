@@ -278,6 +278,7 @@ jQuery(document).ready(function(){
 
 
 function add_subpage_nav(){
+    /* // migrated
     jQuery('.sv_setting_subpages').each(function() {
 
         if( jQuery( this ).children('.sv_setting_subpages_nav').children().length > 0 ){
@@ -327,6 +328,7 @@ function add_subpage_nav(){
         });
     });
     jQuery('.sv_setting_subpages_nav li:first-child').addClass('active');
+
     jQuery('body').on('click', '.sv_setting_subpages_nav > *', function(){
         jQuery( this ).parent().children('*').removeClass('active');
         jQuery( this ).addClass('active');
@@ -355,7 +357,7 @@ function add_subpage_nav(){
 
         jQuery( this ).parent().parent().parent().parent().children( subpage ).children( 'div' ).hide();
         jQuery( this ).parent().parent().parent().parent().children( subpage ).children( breakpoint_page ).fadeIn();
-    });
+    });*/
 }
 
 
