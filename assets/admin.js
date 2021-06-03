@@ -7,6 +7,20 @@ if( typeof SVCA == 'undefined' ){
                 ajax_url: 	sv_core_admin.ajaxurl,
                 ajax_nonce: (typeof sv_core_admin.nonce !== 'undefined') ? sv_core_admin.nonce : '',
             };
+
+            // create global update event
+            const SVCA_UPDATE = new CustomEvent('SVCA_UPDATE', {
+                detail: {},
+                bubbles: true,
+                cancelable: true,
+                composed: false,
+            });
+
+            window.dispatchEvent(SVCA_UPDATE);
+        };
+
+        this.update = function(){
+            jQuery(window).trigger('SVCA_UPDATE');
         };
 
         this.loader = function(show){
