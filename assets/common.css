@@ -1,49 +1,6 @@
 #wpfooter{
 	display:none; //@todo hotfix - replace this after ux is polished
 }
-/* ==== Scrollbar =================================================================================================== */
-::-webkit-scrollbar {
-	width: 10px;
-	height: 10px;
-}
-
-::-webkit-scrollbar-button {
-	width: 0;
-	height: 0;
-}
-
-::-webkit-scrollbar-thumb {
-	background: rgba(43, 45, 48, .1);
-	border: 0;
-	border-radius: 0;
-}
-
-::-webkit-crollbar-thumb:hover {
-	background: rgba(43, 45, 48, .1);
-}
-
-::-webkit-scrollbar-thumb:active {
-	background: rgba(43, 45, 48, .1);
-}
-
-::-webkit-scrollbar-track {
-	border: 0;
-	border-radius: 0;
-	background: transparent;
-}
-
-::-webkit-scrollbar-track:hover {
-	background: transparent;
-}
-
-::-webkit-scrollbar-track:active {
-	background: transparent;
-}
-
-::-webkit-scrollbar-corner {
-	background: transparent;
-}
-/* ===/ Scrollbar =================================================================================================== */
 
 /* ==== WordPress =================================================================================================== */
 #wpwrap {
