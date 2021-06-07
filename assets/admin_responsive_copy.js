@@ -86,7 +86,7 @@ jQuery(document).ready(function($) {
 
             self.update_border_width = function(container, id, value){
                 id = SVCA.responsive_copy.get_placeholder_id(id);
-                console.log(id);
+
                 const IDs = [
                     id.replace('[XXX]','\\[mobile\\]'),
                     id.replace('[XXX]','\\[mobile_landscape\\]'),
