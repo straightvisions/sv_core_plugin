@@ -65,6 +65,9 @@ jQuery(document).ready(function($) {
                 id = id.replace('[tablet_pro_landscape]','[XXX]');
                 id = id.replace('[desktop]','[XXX]');
 
+                // color hotfix
+                id = id.replace('[color]','\\[color\\]');
+
                 return id;
             };
 
@@ -78,16 +81,26 @@ jQuery(document).ready(function($) {
                 container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro\\]')).val(value);
                 container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value);
                 container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
+
             };
 
             self.update_color = function(container, id, value){
-                container.find('.sv_setting_responsive.sv_setting_responsive_mobile .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                container.find('.sv_setting_responsive.sv_setting_responsive_mobile_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                container.find('.sv_setting_responsive.sv_setting_responsive_tablet .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                container.find('.sv_setting_responsive.sv_setting_responsive_tablet_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                container.find('.sv_setting_responsive.sv_setting_responsive_desktop .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                id = SVCA.responsive_copy.get_placeholder_id(id);
+
+                const classes = [
+                    'mobile',
+                    'mobile_landscape',
+                    'tablet',
+                    'tablet_landscape',
+                    'tablet_pro',
+                    'tablet_pro_landscape',
+                    'desktop'
+                ];
+
+                for(i=0;i<classes.length;i++){
+                    container.find('.sv_setting_responsive.sv_setting_responsive_'+classes[i]+' .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                }
+
             };
 
             self.update_border_width = function(container, id, value){
@@ -125,7 +138,7 @@ jQuery(document).ready(function($) {
 
             self.update_border_radius = function(container, id, value){
                 id = SVCA.responsive_copy.get_placeholder_id(id);
-                console.log(id);
+         
                 const IDs = [
                     id.replace('[XXX]','\\[mobile\\]'),
                     id.replace('[XXX]','\\[mobile_landscape\\]'),
