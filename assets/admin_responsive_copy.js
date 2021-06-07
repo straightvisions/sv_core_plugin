@@ -19,17 +19,22 @@ jQuery(document).ready(function($) {
                     const container = jQuery(this).closest('.sv_setting');
                     const settings_source = container.children('.active').first();
                     const settings_source_inputs = settings_source.find('.sv_input');
-                    const is_color_setting = container.hasClass('sv_setting_color_parent');
 
                     settings_source_inputs.each(function(){
                         const el    = jQuery(this);
                         let id      = el.attr('id');
+                        const is_color_setting = el.closest('.sv_setting').hasClass('sv_setting_color_parent');
 
                         if(typeof id == 'undefined' || id == ''){
                             return; // block group settings - please fix this
                         }
                         const value = el.val();
-                        const settings_type = el.attr('data-sv_settings_type') ? el.attr('data-sv_settings_type') : 'default';
+                        let settings_type = el.attr('data-sv_settings_type') ? el.attr('data-sv_settings_type') : 'default';
+
+                        // hotfix color settings field for missing react object class
+                        if( is_color_setting ){
+                            settings_type = 'color';
+                        }
 
                         // copy to main settings input form field
                         SVCA.responsive_copy.copy(container, id, value);
@@ -38,19 +43,10 @@ jQuery(document).ready(function($) {
                         switch(settings_type){
                             case 'border_width': SVCA.responsive_copy.update_border_width(container, id, value); break;
                             case 'border_radius': SVCA.responsive_copy.update_border_radius(container, id, value); break;
+                            case 'color': SVCA.responsive_copy.update_color(container, id, value); break;
                         }
 
-                        // Settings type: color
-                        if ( is_color_setting ) {
-                            container.find('.sv_setting_responsive.sv_setting_responsive_mobile .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                            container.find('.sv_setting_responsive.sv_setting_responsive_mobile_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                            container.find('.sv_setting_responsive.sv_setting_responsive_tablet .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                            container.find('.sv_setting_responsive.sv_setting_responsive_desktop .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-                        }
-                    }, self);
+                    });
 
                     SVCA.show_notice('Setting copied to breakpoints.');
 
@@ -82,6 +78,16 @@ jQuery(document).ready(function($) {
                 container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro\\]')).val(value);
                 container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value);
                 container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
+            };
+
+            self.update_color = function(container, id, value){
+                container.find('.sv_setting_responsive.sv_setting_responsive_mobile .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                container.find('.sv_setting_responsive.sv_setting_responsive_mobile_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                container.find('.sv_setting_responsive.sv_setting_responsive_tablet .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                container.find('.sv_setting_responsive.sv_setting_responsive_tablet_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
+                container.find('.sv_setting_responsive.sv_setting_responsive_desktop .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
             };
 
             self.update_border_width = function(container, id, value){
