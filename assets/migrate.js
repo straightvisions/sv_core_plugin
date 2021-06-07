@@ -1,71 +1,5 @@
 
-// no need for rebind --------------------------------------------------------------------------------------------------
 
-jQuery(document).on('click', '.sv_admin_mobile_toggle', function() {
-    jQuery(jQuery(this).attr('data-target')).toggle();
-    jQuery( 'body' ).toggleClass( 'sv_admin_menu_open' );
-});
-
-
-/* Responsive Select */
-jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_select > *', function() {
-    jQuery(this).parent().parent().parent().find('.sv_setting_responsive').removeClass('active').hide();
-    jQuery(this).parent().parent().parent().find('.sv_setting_responsive_'+jQuery(this).data('sv_setting_responsive_select')).addClass('active').show();
-
-    // highlight selector
-    jQuery(this).parent().find('i').removeClass('active')
-    jQuery(this).addClass('active')
-});
-
-/* Responsive Inherit Overwrite */
-jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', function() {
-    const container = jQuery(this).closest('.sv_setting');
-    const settings_source = container.children('.active').first();
-    const settings_source_inputs = settings_source.find('.sv_input');
-    const is_color_setting = container.hasClass('sv_setting_color_parent');
-
-    settings_source_inputs.each(function(){
-        const el    = jQuery(this);
-        let id      = el.attr('id');
-
-        if(typeof id == 'undefined' || id == ''){
-            return; // block group settings - please fix this
-        }
-        const value = el.val();
-
-        /*hackish, use react or states */
-        id = id.replace('[mobile]','[XXX]');
-        id = id.replace('[mobile_landscape]','[XXX]');
-        id = id.replace('[tablet]','[XXX]');
-        id = id.replace('[tablet_landscape]','[XXX]');
-        id = id.replace('[tablet_pro]','[XXX]');
-        id = id.replace('[tablet_pro_landscape]','[XXX]');
-        id = id.replace('[desktop]','[XXX]');
-
-        container.find('.sv_input#'+id.replace('[XXX]','\\[mobile\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[mobile_landscape\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_landscape\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
-
-        // Settings type: color
-        if ( is_color_setting ) {
-            container.find('.sv_setting_responsive.sv_setting_responsive_mobile .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-            container.find('.sv_setting_responsive.sv_setting_responsive_mobile_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-            container.find('.sv_setting_responsive.sv_setting_responsive_tablet .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-            container.find('.sv_setting_responsive.sv_setting_responsive_tablet_pro_landscape .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-            container.find('.sv_setting_responsive.sv_setting_responsive_desktop .sv_setting_color_value').css('background-color', 'rgba(' + value + ')');
-        }
-    });
-
-    SVCA.show_notice('Setting copied to breakpoints.');
-    update_option( jQuery( this ).closest( 'form' ) );
-
-});
 
 /* set form referer for redirect to current subpage on submit */
 jQuery( document ).on('submit', 'section.sv_admin_section form', function(e){
@@ -142,32 +76,7 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
 
     /* When the number setting has is_units is enabled */
 
-    /* When the select unit changes */
-    jQuery( '.sv_setting select.sv_input_units' ).unbind().on( 'change', function(e) {
-        const number_select = jQuery( e.target ).parent().children( 'input[type="number"]' );
-        const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
 
-        const unit 		= e.target.value;
-        const number 	= number_select.val();
-        const value 	= number + unit;
-
-        data_input.val( value );
-    } );
-
-    /* When the number value changes */
-    jQuery( '.sv_setting input[type="number"]' ).unbind().on( 'change', function(e) {
-        const unit_select = jQuery( e.target ).parent().children( 'select.sv_input_units' );
-
-        if ( unit_select.length > 0 ) {
-            const data_input = jQuery( e.target ).parent().children( 'input[data-sv_type="sv_form_field"]' );
-
-            const unit 		= unit_select.val();
-            const number 	= e.target.value;
-            const value 	= number + unit;
-
-            data_input.val( value );
-        }
-    } );
 
     /* ===== Ajax Check ===== */
     jQuery( 'button[data-sv_admin_ajax], input[data-sv_admin_ajax]' ).on( 'click', function() {
