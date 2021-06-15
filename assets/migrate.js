@@ -2,9 +2,7 @@
 
 
 /* set form referer for redirect to current subpage on submit */
-jQuery( document ).on('submit', 'section.sv_admin_section form', function(e){
-    jQuery(this).find('input[name="_wp_http_referer"]').val(jQuery(location).attr('href'));
-});
+
 
 
 // needs for rebind ----------------------------------------------------------------------------------------------------
