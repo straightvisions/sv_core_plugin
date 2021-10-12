@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 
         SVCA.sections = new function(){
 
-            self = this; // prevents scope problem within loops
+            const self = this; // prevents scope problem within loops
 
             self.params = {
                 container: null,
@@ -103,7 +103,7 @@ jQuery(document).ready(function($) {
                             }
 
                         }
-						jQuery('body').trigger('sv_admin_section_loaded');
+                        jQuery(window).trigger('sv_admin_section_loaded');
                         self.close_call();
                     },
                     error: function(errorThrown){

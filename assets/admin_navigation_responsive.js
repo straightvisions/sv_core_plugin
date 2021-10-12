@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 
         SVCA.navigation_responsive = new function(){
 
-            self = this; // prevents scope problem within loops
+            const self = this; // prevents scope problem within loops
 
             self.params = {
                 container: null,

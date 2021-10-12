@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 
         SVCA.save = new function(){
 
-            self = this; // prevents scope problem within loops
+            const self = this; // prevents scope problem within loops
 
             self.params = {
                 container: null,
@@ -17,6 +17,7 @@ jQuery(document).ready(function($) {
 
                 // hotfix while feature dev
                 jQuery( document ).on('submit', 'section.sv_admin_section form', function(e){
+                    console.log('SVCA-SAVE start saving...');
                     jQuery(this).find('input[name="_wp_http_referer"]').val(jQuery(location).attr('href'));
                 });
 
