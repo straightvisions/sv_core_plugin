@@ -41,7 +41,7 @@ if( typeof SVCA == 'undefined' ){
             let tmp 	= [];
             const items = location.search.substr(1).split("&");
 
-            for (var index = 0; index < items.length; index++) {
+            for (let index = 0; index < items.length; index++) {
                 tmp = items[index].split("=");
                 if (tmp[0] === param_name) result = decodeURIComponent(tmp[1]);
             }
@@ -53,7 +53,7 @@ if( typeof SVCA == 'undefined' ){
             const url 			= new URL( window.location.href );
             const search_params = url.searchParams;
 
-            for (var key of Object.keys(params)) {
+            for (let key of Object.keys(params)) {
                 search_params.set(key, params[key]);
             }
 
@@ -77,10 +77,10 @@ if( typeof SVCA == 'undefined' ){
         };
 
         this.show_notice = function( msg, type = 'info' ){
-            var types 	= [ 'info', 'success', 'warning', 'error' ];
+            let types 	= [ 'info', 'success', 'warning', 'error' ];
 
             if ( jQuery.inArray( type, types ) >= 0 ) {
-                var el = jQuery( '.sv_admin_notice' );
+                let el = jQuery( '.sv_admin_notice' );
                 type = 'notice-' + type;
 
                 // Removes old message and replaces it with the new one
