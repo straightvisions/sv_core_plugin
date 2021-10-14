@@ -36,6 +36,12 @@ jQuery(document).ready(function($) {
                 jQuery(window).trigger('SVCA_UPDATE');
             };
 
+            self.save = function(){
+              const data = self.params.data;
+
+
+            };
+
             self.bind_events = function(){
               const container = self.params.container;
 
