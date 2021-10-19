@@ -59,7 +59,6 @@ div.sv_admin_menu .sv_admin_menu_item {
 	justify-content: center;
 	text-decoration: none;
 	color: rgba(43, 45, 48, 1);
-	border-left: 2px solid transparent;
 	transition: none;
 	outline: none;
 	box-shadow: none;
@@ -205,6 +204,8 @@ section.sv_admin_section .section_head {
 	position: sticky;
 	top: 0;
 	flex-direction: row;
+	background: linear-gradient(45deg, #EEE 30%, #FFF 90%);
+	text-transform: uppercase;
 }
 
 section.sv_admin_section .section_head .textbox {
@@ -228,11 +229,11 @@ section.sv_admin_section div.section_content {
 .sv_section_description {
 	margin-bottom: 24px;
 	background-color: rgba( 50, 50, 48, .05 );
-	border-left: 2px dashed;
 	padding: 15px;
 	border-radius: 0 5px 5px 0;
 	font-weight: 600;
 	font-size: 14px;
+	border-bottom: 1px solid #CCC;
 }
 
 /* Info Section */
@@ -416,14 +417,6 @@ section.sv_admin_section div.section_content code {
 @media (min-width: 800px) {
 	#wpbody-content {
 		flex-direction: row;
-	}
-
-	section.sv_admin_section .section_head {
-		padding: 30px;
-	}
-
-	div.sv_admin_menu a.sv_admin_brand {
-		padding: 30px 15px;
 	}
 
 	div.sv_admin_menu .sv_admin_menu_item {
