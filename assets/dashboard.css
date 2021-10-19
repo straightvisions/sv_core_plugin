@@ -1,3 +1,21 @@
+div.sv_wrapper ::-webkit-scrollbar{
+	width: 13px;
+	height: 13px;
+}
+div.sv_wrapper ::-webkit-scrollbar-thumb{
+	background: #B3AFB3;
+	border-radius: 0;
+}
+div.sv_wrapper ::-webkit-scrollbar-thumb:hover{
+	background: #B3AFB3;
+}
+div.sv_wrapper ::-webkit-scrollbar-track{
+	background: #CCC;
+	border-radius: 0;
+	box-shadow: inset 0 0 0 0 #F0F0F0;
+}
+
+
 /* ==== straightvisions Dashboard - Page Layout ===================================================================== */
 body.sv_admin_menu_open {
 	overflow: hidden;
@@ -8,6 +26,11 @@ body.sv_admin_menu_open {
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 0;
+}
+@media ( min-width: 1200px ) {
+	.sv_wrapper{
+		flex-direction: row;
+	}
 }
 /* ===/ straightvisions Dashboard - Page Layout ===================================================================== */
 
@@ -28,7 +51,7 @@ div.sv_admin_menu_head {
 	top: 0;
 }
 
-div.sv_admin_menu a.sv_admin_brand,
+div.sv_admin_menu .sv_admin_menu_head,
 div.sv_admin_menu .sv_admin_menu_item {
 	display: flex;
 	height: 50px;
@@ -41,6 +64,7 @@ div.sv_admin_menu .sv_admin_menu_item {
 	outline: none;
 	box-shadow: none;
 	background-color: #FFF;
+	background: linear-gradient(45deg, #FFF 30%, #EEE 90%);
 }
 
 div.sv_admin_menu .sv_admin_menu_item {
@@ -59,28 +83,38 @@ div.sv_admin_menu a.sv_admin_brand img {
 }
 
 div.sv_admin_menu div.sv_admin_mobile_toggle {
+	width:30px;
 	height: 30px;
 	line-height: 1;
 	cursor: pointer;
 	margin-left: 10px;
 }
+div.sv_admin_menu div.sv_admin_mobile_toggle::before {
+	content: '';
+	display: block;
+	height: 100%;
+	width: 100%;
+	-webkit-mask-size: 100%;
+	-webkit-mask-position: center;
+	-webkit-mask-repeat: no-repeat;
+	transition: -webkit-mask-image .5s ease-in-out;
+	-webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>');
+	background-color: rgba(13,13,13,1);
+}
 
 div#sv_admin_menu_body {
-	display: none;
 	transition: none;
-	max-height: calc( 100vh - ( 80px + 46px ) );
+	max-height: calc( 100vh - ( 130px + 46px ) );
 	overflow-y: auto;
+	display:none;
+}
+.sv_admin_menu_open div#sv_admin_menu_body {
+	display:block;
 }
 
 @media ( min-width: 782px ) {
 	div#sv_admin_menu_body {
-		max-height: calc( 100vh - ( 80px + 32px ) );
-	}
-}
-
-@media ( min-width: 800px ) {
-	div#sv_admin_menu_body {
-		max-height: calc( 100vh - ( 110px + 32px ) );
+		max-height: calc( 100vh - ( 130px + 32px ) );
 	}
 }
 
@@ -105,6 +139,7 @@ div.sv_admin_menu .sv_admin_menu_item:focus {
 div.sv_admin_menu .sv_admin_menu_item.active {
 	color: #ffffff;
 	background-color: rgba( 50, 50, 48, 1 );
+	background: linear-gradient(45deg, #000 30%, #444 90%);
 }
 
 div.sv_admin_menu .sv_admin_menu_item > i {
@@ -186,7 +221,9 @@ section.sv_admin_section .section_head .section_desc {
 }
 
 section.sv_admin_section div.section_content {
-	padding: 15px 0 0 0;
+	max-height: calc( 100vh - ( 170px + 32px ) );
+	overflow: auto;
+	padding: 20px;
 }
 .sv_section_description {
 	margin-bottom: 24px;
@@ -238,10 +275,6 @@ section.sv_admin_section div.section_content ul.instance_list {
 	display: grid;
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
-}
-
-section.sv_admin_section div.section_content ul.info_list li span {
-	color: rgba(52, 172, 245, 1);
 }
 
 section.sv_admin_section div.section_content ul.instance_list a {
@@ -408,14 +441,6 @@ section.sv_admin_section div.section_content code {
 }
 
 @media (min-width: 1200px) {
-	section.sv_admin_section div.section_content {
-		padding: 15px 0 0 20px;
-	}
-
-	.sv_wrapper .sv_dashboard_content {
-		max-width: 1000px;
-	}
-
 	div.sv_admin_menu div.sv_admin_mobile_toggle {
 		display: none;
 	}
@@ -423,10 +448,6 @@ section.sv_admin_section div.section_content code {
 	div#sv_admin_menu_body {
 		opacity: 1;
 		display: block;
-	}
-
-	.sv_wrapper {
-		flex-direction: row;
 	}
 
 	div.sv_admin_menu {
@@ -724,6 +745,13 @@ section.sv_admin_section div.section_content code {
 .sv100_settings_ajax_save_form p.submit{
 	position: fixed;
 	bottom: 0;
-	left: 180px;
+	left: 0;
+	right:0;
+	text-align:center;
 	z-index: 100;
+	margin: auto;
+	padding: 14px 55px;
+	border: 1px solid #CCC;
+	background: linear-gradient(45deg,#FFF 30%,#EEE 90%);
+	box-shadow: 0 19px 38px rgb(0 0 0 / 30%), 0 15px 12px rgb(0 0 0 / 22%);
 }

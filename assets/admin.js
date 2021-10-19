@@ -75,6 +75,10 @@ jQuery(document).on('click', '.sv_admin_menu_item, [data-sv_admin_menu_target]',
         jQuery('.sv_admin_menu_item').removeClass('active');
         SVCA.sections.get( jQuery(this).data('sv_admin_menu_target') );
         jQuery(this).addClass('active');
+
+		document.querySelector('html').scrollIntoView({
+			behavior: 'smooth'
+		});
     }
 });
 

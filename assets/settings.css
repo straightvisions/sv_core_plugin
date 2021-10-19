@@ -46,7 +46,8 @@
 	flex-grow: 1;
 }
 .sv_setting:first-child:last-child,
-.sv_setting:nth-child(even){
+.sv_setting:nth-child(even),
+.sv_setting:nth-child(odd):last-child{
 	flex-basis: 50%;
 	margin-right:0;
 }
