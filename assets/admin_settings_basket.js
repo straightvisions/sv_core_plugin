@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
             self.update = function(params){
 
                 self.params.data = {...self.params.data, ...params};
-
+                console.log(self.params.data);
                 jQuery(window).trigger('SVCA_UPDATE');
             };
 
@@ -44,7 +44,6 @@ jQuery(document).ready(function($) {
 
             self.bind_events = function(){
               const container = self.params.container;
-
               /* @todo detect
               select
               responsive copy
@@ -56,9 +55,11 @@ jQuery(document).ready(function($) {
                   const el      = jQuery(this);
                   const name    = el.attr('name');
                   const value   = el.val();
-
-                  console.log(name);
-                  console.log(value);
+                  const title   = el.attr('placeholder'); // fallback due complex settings header html
+   
+                  const params = { [name]: { name, value, title } };
+            
+                  self.update(params);
               });
 
             };
