@@ -74,12 +74,12 @@ jQuery(document).ready(function($) {
             self.copy = function(container, id, value){
                 id = SVCA.responsive_copy.get_placeholder_id(id); // weird scope change
 
-                container.find('.sv_input#'+id.replace('[XXX]','\\[mobile\\]')).val(value);
-                container.find('.sv_input#'+id.replace('[XXX]','\\[mobile_landscape\\]')).val(value);
-                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet\\]')).val(value);
-                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_landscape\\]')).val(value);
-                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro\\]')).val(value);
-                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value);
+                container.find('.sv_input#'+id.replace('[XXX]','\\[mobile\\]')).val(value).trigger('change');
+                container.find('.sv_input#'+id.replace('[XXX]','\\[mobile_landscape\\]')).val(value).trigger('change');
+                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet\\]')).val(value).trigger('change');
+                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_landscape\\]')).val(value).trigger('change');
+                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro\\]')).val(value).trigger('change');
+                container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value).trigger('change');
                 container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
 
             };
