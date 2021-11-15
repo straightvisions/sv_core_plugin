@@ -43,24 +43,35 @@ jQuery(document).ready(function($) {
             };
 
             self.bind_events = function(){
-              const container = self.params.container;
-              /* @todo detect
-              select
-              responsive copy
-              dynamic settings creation
-               */
-
-              // text, checkbox
-              jQuery(container+' input').on('change', function(){
-                  const el      = jQuery(this);
-                  const name    = el.attr('name');
-                  const value   = el.val();
-                  const title   = el.attr('placeholder'); // fallback due complex settings header html
-   
-                  const params = { [name]: { name, value, title } };
-            
-                  self.update(params);
-              });
+				const container = self.params.container;
+				/* @todo detect
+				select
+				responsive copy
+				dynamic settings creation
+				*/
+				
+				// text, checkbox
+				jQuery(container+' input.sv_input').on('change', function(){
+				  const el      = jQuery(this);
+				  const name    = el.attr('name');
+				  const value   = el.val();
+				  const title   = el.attr('placeholder'); // fallback due complex settings header html
+				
+				  const params = { [name]: { name, value, title } };
+				
+				  self.update(params);
+				});
+	            // select
+	            jQuery(container+' select.sv_input').on('change', function(){
+		            const el      = jQuery(this);
+		            const name    = el.attr('name');
+		            const value   = el.val();
+		            const title   = el.attr('placeholder'); // fallback due complex settings header html
+		
+		            const params = { [name]: { name, value, title } };
+		
+		            self.update(params);
+	            });
 
             };
 
