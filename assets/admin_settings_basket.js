@@ -27,8 +27,9 @@ jQuery(document).ready(function($) {
                
                 	self.handle_button_save(jQuery(this));
                 });
-
+	
                 console.log('SVCA-BASKET init - done');
+	            
             };
 
             self.on_update = function(){
@@ -89,6 +90,16 @@ jQuery(document).ready(function($) {
 				
 				  self.update(params);
 				});
+	
+	            // custom react events
+	            window.addEventListener('sv_react_el_changed', function(e){
+		            const name    = e.detail.name;
+		            const value   = e.detail.value;
+		            const title   = e.detail.title; // fallback due complex settings header html
+		
+		            const params = { [name]: { name, value, title } };
+		            self.update(params);
+	            });
 	      
             };
 
