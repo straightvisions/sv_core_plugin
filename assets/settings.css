@@ -1,26 +1,3 @@
-/* Form Table */
-.sv_dashboard_content table.form-table tbody {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-}
-
-.sv_dashboard_content table.form-table tr {
-	width: 100%;
-	margin-bottom: 50px;
-}
-
-.sv_dashboard_content table.form-table th {
-	padding:0;
-	width:auto;
-}
-
-.sv_dashboard_content table.form-table td {
-	display: block;
-	padding: 0;
-	margin: 0;
-}
-
 /* Setting Info */
 .sv_setting_flex{
 	display:flex;
