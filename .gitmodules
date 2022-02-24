@@ -4,6 +4,3 @@
 [submodule "dependencies"]
 	path = dependencies
 	url = ../sv_dependencies
-[submodule "freemius"]
-	path = freemius
-	url = ../../Freemius/wordpress-sdk
