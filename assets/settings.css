@@ -171,7 +171,6 @@
 	right: 0;
 	background-color: rgb(255, 255, 255);
 	padding: 10px;
-	user-select: none;
 	z-index:1000;
 }
 
