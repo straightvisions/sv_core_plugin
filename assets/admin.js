@@ -111,29 +111,29 @@ jQuery(document).on('click', '.sv_setting_header .sv_setting_responsive_force', 
 
     settings_source_inputs.each(function(){
         const el    = jQuery(this);
-        let id      = el.attr('id');
+        let name      = el.attr('name');
 
-        if(typeof id == 'undefined' || id == ''){
+        if(typeof name == 'undefined' || name == ''){
             return; // block group settings - please fix this
         }
         const value = el.val();
 
         /*hackish, use react or states */
-        id = id.replace('[mobile]','[XXX]');
-        id = id.replace('[mobile_landscape]','[XXX]');
-        id = id.replace('[tablet]','[XXX]');
-        id = id.replace('[tablet_landscape]','[XXX]'); 
-        id = id.replace('[tablet_pro]','[XXX]');
-        id = id.replace('[tablet_pro_landscape]','[XXX]');
-        id = id.replace('[desktop]','[XXX]');
+		name = name.replace('[mobile]','[XXX]');
+		name = name.replace('[mobile_landscape]','[XXX]');
+		name = name.replace('[tablet]','[XXX]');
+		name = name.replace('[tablet_landscape]','[XXX]');
+		name = name.replace('[tablet_pro]','[XXX]');
+		name = name.replace('[tablet_pro_landscape]','[XXX]');
+		name = name.replace('[desktop]','[XXX]');
 
-        container.find('.sv_input#'+id.replace('[XXX]','\\[mobile\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[mobile_landscape\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_landscape\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[tablet_pro_landscape\\]')).val(value);
-        container.find('.sv_input#'+id.replace('[XXX]','\\[desktop\\]')).val(value).trigger('change');
+		jQuery('[name="'+name.replace('[XXX]','[mobile]')+'"').val(value);
+		jQuery('[name="'+name.replace('[XXX]','[mobile_landscape]')+'"').val(value);
+		jQuery('[name="'+name.replace('[XXX]','[tablet]')+'"').val(value);
+		jQuery('[name="'+name.replace('[XXX]','[tablet_landscape]')+'"').val(value);
+		jQuery('[name="'+name.replace('[XXX]','[tablet_pro]')+'"').val(value);
+		jQuery('[name="'+name.replace('[XXX]','[tablet_pro_landscape]')+'"').val(value);
+		jQuery('[name="'+name.replace('[XXX]','[desktop]')+'"').val(value).trigger('change');
 
         // Settings type: color
         if ( is_color_setting ) {
@@ -437,7 +437,7 @@ function add_subpage_nav(){
         if( jQuery( this ).children('.sv_setting_subpages_nav').children().length > 0 ){
             return; // skip
         }
-        
+
         jQuery( this ).children('.sv_setting_subpage').each(function( i ) {
 
             // Checks if the subpage contains breakpoint pages
@@ -570,7 +570,7 @@ function get_modal_content( type, args ) {
 /* Input Range & Box Shadow Settings Type */
 function sv_setting_box_shadow( target ) {
 	const parent = jQuery( target ).parents( '.sv_setting_box_shadow' );
-	
+
 	if ( parent.length > 0 ) {
 		/* Inputs */
 		const horizontal 		= parent.find( '.sv_setting_box_shadow_horizontal' ).children( 'input[type="number"].sv_input_range_indicator' ).val();
