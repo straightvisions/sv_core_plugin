@@ -299,7 +299,7 @@ function bind_events(){ //@todo remove deprecated functions and move all of this
 
                ];
 
-              const perChunk = 50; // CHANGE THIS TO TOGGLE CHUNK SIZE
+              const perChunk = 200; // CHANGE THIS TO TOGGLE CHUNK SIZE
               const data = form.serializeArray();
               const chunks = data.reduce((all,one,i) => {
                    const ch = Math.floor(i/perChunk);
