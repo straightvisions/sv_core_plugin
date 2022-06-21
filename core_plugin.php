@@ -1,15 +1,6 @@
 <?php
 	namespace sv_core;
-	
-	/**
-	 * @author			straightvisions GmbH
-	 * @package			sv100
-	 * @copyright       2019 straightvisions GmbH
-	 * @link			https://straightvisions.com
-	 * @since			1.0
-	 * @license			See license.txt or https://straightvisions.com
-	 */
-	
+
 	require_once( 'core/core.php' );
 	
 	class core_plugin extends core {
