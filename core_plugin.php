@@ -14,6 +14,31 @@
 				add_action( 'admin_menu', array( $this, 'section_menus' ), 1 );
 
 				require_once( 'freemius/start.php' );
+
+				$this->lib_register();
+			}
+		}
+
+		public function lib_register(){
+			// Swiffy Slider
+			$this->get_script('swiffy')
+			     ->set_type('css')
+			     ->set_path($this->get_url_core('../lib/swiffy/swiffy-slider.min.css'));
+
+			$this->get_script('swiffy_js')
+				->set_type('js')
+				->set_path($this->get_url_core('../lib/swiffy/swiffy-slider.min.js'));
+		}
+		public function lib_enqueue(string $script){
+			if($script === 'swiffy'){
+				$this->get_root()->get_script('swiffy')->set_is_enqueued();
+				$this->get_root()->get_script('swiffy_js')->set_is_enqueued();
+			}
+		}
+		public function lib_enqueue_gutenberg(string $script){
+			if($script === 'swiffy'){
+				$this->get_root()->get_script('swiffy')->set_is_gutenberg();
+				$this->get_root()->get_script('swiffy_js')->set_is_gutenberg();
 			}
 		}
 
