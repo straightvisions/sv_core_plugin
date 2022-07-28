@@ -21,34 +21,34 @@
 
 		public function lib_register(){
 			// Swiffy Slider
-			$this->get_script('swiffy')
+			$this->get_active_core()->get_script('swiffy')
 			     ->set_type('css')
 			     ->set_path($this->get_url_core('../lib/swiffy/swiffy-slider.min.css'));
 
-			$this->get_script('swiffy_js')
+			$this->get_active_core()->get_script('swiffy_js')
 				->set_type('js')
 				->set_path($this->get_url_core('../lib/swiffy/swiffy-slider.min.js'));
 
-			$this->get_script('swiffy_extension_js')
+			$this->get_active_core()->get_script('swiffy_extension_js')
 			     ->set_type('js')
 			     ->set_path($this->get_url_core('../lib/swiffy/swiffy-slider-extensions.min.js'));
 		}
 		public function lib_enqueue(string $script){
 			if($script === 'swiffy'){
-				$this->get_root()->get_script('swiffy')->set_is_enqueued();
-				$this->get_root()->get_script('swiffy_js')->set_is_enqueued();
+				$this->get_active_core()->get_script('swiffy')->set_is_enqueued();
+				$this->get_active_core()->get_script('swiffy_js')->set_is_enqueued();
 			}
 			if($script === 'swiffy_extension'){
-				$this->get_root()->get_script('swiffy_extension_js')->set_is_enqueued();
+				$this->get_active_core()->get_script('swiffy_extension_js')->set_is_enqueued();
 			}
 		}
 		public function lib_enqueue_gutenberg(string $script){
 			if($script === 'swiffy'){
-				$this->get_root()->get_script('swiffy')->set_is_gutenberg();
-				$this->get_root()->get_script('swiffy_js')->set_is_gutenberg();
+				$this->get_active_core()->get_script('swiffy')->set_is_gutenberg();
+				$this->get_active_core()->get_script('swiffy_js')->set_is_gutenberg();
 			}
 			if($script === 'swiffy_extension'){
-				$this->get_root()->get_script('swiffy_extension_js')->set_is_gutenberg();
+				$this->get_active_core()->get_script('swiffy_extension_js')->set_is_gutenberg();
 			}
 		}
 
