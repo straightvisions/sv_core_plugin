@@ -13,8 +13,6 @@
 				add_action( 'admin_menu', array( $this, 'admin_menu' ), 1 );
 				add_action( 'admin_menu', array( $this, 'section_menus' ), 1 );
 
-				require_once( 'freemius/start.php' );
-
 				$this->lib_register();
 			}
 		}
