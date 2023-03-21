@@ -18,6 +18,11 @@
 		}
 
 		public function lib_register(){
+			// Object Watcher
+			$this->get_active_core()->get_script('object_watcher_js')
+			     ->set_type('js')
+			     ->set_path($this->get_url_core('../lib/object_watcher/object_watcher.min.js'));
+
 			// Swiffy Slider
 			$this->get_active_core()->get_script('swiffy')
 			     ->set_type('css')
@@ -32,6 +37,9 @@
 			     ->set_path($this->get_url_core('../lib/swiffy/swiffy-slider-extensions.min.js'));
 		}
 		public function lib_enqueue(string $script){
+			if($script === 'object_watcher'){
+				$this->get_active_core()->get_script('object_watcher_js')->set_is_enqueued();
+			}
 			if($script === 'swiffy'){
 				$this->get_active_core()->get_script('swiffy')->set_is_enqueued();
 				$this->get_active_core()->get_script('swiffy_js')->set_is_enqueued();
