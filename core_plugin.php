@@ -62,7 +62,7 @@
 			add_menu_page(
 				__( 'straightvisions', 'sv_core' ),
 				__( 'straightvisions', 'sv_core' ),
-				'manage_options',
+				apply_filters('sv_admin_menu_capability', 'manage_options'),
 				'straightvisions',
 				'',
 				$this->get_url_core( '../assets/logo_icon.svg' ),
@@ -73,7 +73,7 @@
 				'straightvisions',				// parent slug
 				__( 'Info', 'sv_core' ),					// page title
 				__( 'Info', 'sv_core' ),					// menu title
-				'manage_options',					// capability
+				apply_filters('sv_admin_menu_capability', 'manage_options'),					// capability
 				'straightvisions',				// menu slug
 				function() {								// callable function
 					$this->load_page( $this->get_path_core( 'info/backend/tpl/about.php' ) );
@@ -89,7 +89,7 @@
 					'straightvisions',			// parent slug
 					$instance->get_section_title(),			// page title
 					$instance->get_section_title(),			// menu title
-					'manage_options',				// capability
+					apply_filters('sv_admin_menu_capability', 'manage_options'),				// capability
 					$instance->get_prefix(),				// menu slug
 					function () use ( $instance ) {			// callable function
 						$instance->load_page();
