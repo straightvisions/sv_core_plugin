@@ -130,7 +130,8 @@
 			require_once( $full_init_path );
 
 			$class_name  = $this->get_root()->get_name() . '\\' . $name;
-			$this->get_root()->$name = new $class_name();
+			// @todo: deprecated in PHP 8
+			@$this->get_root()->$name = new $class_name();
 			$this->get_root()->$name
 				->set_name( $this->get_root()->get_prefix( $this->get_root()->$name->get_module_name() ) )
 				->set_path( $full_path )
